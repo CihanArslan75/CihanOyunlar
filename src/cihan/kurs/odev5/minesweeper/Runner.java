@@ -1,8 +1,5 @@
 package cihan.kurs.odev5.minesweeper;
 
-
-
-
 public class Runner {
 
 	public static final int SIZE=10;
