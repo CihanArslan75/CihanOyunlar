@@ -7,6 +7,11 @@ public class BombsArray {
 	
 	private int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
 	private String[][] sightBombsArray = new String[Runner.SIZE][Runner.SIZE];
+	
+	public BombsArray() {
+		
+
+	}
 
 	public int[][] getBombsArray() {
 		return bombsArray;
@@ -30,52 +35,99 @@ public class BombsArray {
 	
 	public void setSightBombsArray(String select,int row,int column) {
 		NumberFormat formatter = new DecimalFormat("000");
-		int iFirst;
-        int jFirst;
-        int iLast;
-        int jLast;
+		int[] injn;
+		int in;
+		int jn;
+		boolean exit=true;
         String selectFirst=select.substring(0,1).toUpperCase( );
 /***************************************************************************************/
-       // System.out.println("aaaa1:"+sightBombsArray[row][column].substring(0,1));
-	  if(bombsArray[row][column]!=Runner.BSIZE  && selectFirst.equals("S")) {   //bomba olmayan kutular için set
-        if(bombsArray[row][column]==0 ) 
-	    {
-	    	sightBombsArray[row][column]=" ";	
-	    	/*****************Komşularından olanları bul *****/    	
-		  			 if(row==0) iFirst=row; else iFirst=row-1;
-					 if(column==0) jFirst=column; else jFirst=column-1;
-					 
-					 if(row==Runner.SIZE-1) iLast=row; else iLast=row+1;
-					 if(column==Runner.SIZE-1) jLast=column; else jLast=column+1;
-					  for(int ii=iFirst;ii<=iLast;ii++) {
-						 for(int jj=jFirst;jj<=jLast;jj++) {
-							 if(ii==row && jj==column) {}
-							 else { 
-								 if(bombsArray[ii][jj]==0)  
-								 {	 		
-									 sightBombsArray[ii][jj]=" ";		
-								 }
-					 						 
-						  }
-					 }
-				}
-/***************************************************************************************/
-	    }
-	    else
-	    {
-	    	sightBombsArray[row][column]=String.valueOf(bombsArray[row][column]);
-	    }
-	  } 
-	  else   //  bomba olan  kutular için  flag  
-	  {   if(sightBombsArray[row][column].equals("BOMB")) 
-		  {
-		     sightBombsArray[row][column]="S"+select.substring(1,4);
-		  }
-	      else
-	      {
-		    sightBombsArray[row][column]="BOMB";
+      if(bombsArray[row][column]!=Runner.BSIZE  && selectFirst.equals("S")) {//bomba olmayan kutular için set
+       	 if(bombsArray[row][column]==0 )  
+	     {
+	    	/*****************Boşlukların Komşularından olanları bul *****/  
+	    	   String[] nearB= nearBox(row,column)	;
+			   int nearBSum=Integer.parseInt(nearB[9]);
+			   for(int ii=0;ii<nearBSum;ii++)
+			   {  	
+				  injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+				  in=injn[0];
+				  jn=injn[1];
+				  if(bombsArray[in][jn]!=100) {
+					  if(bombsArray[in][jn]==0) 
+					  {
+						 sightBombsArray[in][jn]=" ";
+						 
+						 String[] nearB1= nearBox(in,jn)	;
+						 int nearBSum1=Integer.parseInt(nearB1[9]);
+						 int[] injn1;
+						 int in1;
+						 int jn1;
+						 for(int i=0;i<nearBSum1;i++)
+						 {  	
+							  injn1=Runner.findNumberfromIJ(Integer.parseInt(nearB1[i].substring(1,4)));
+							  in1=injn1[0];
+							  jn1=injn1[1];
+							  if(bombsArray[in1][jn1]!=100) {
+							  	  if(bombsArray[in1][jn1]==0) 
+								  {
+							  		  sightBombsArray[in1][jn1]=" "; 
+							  	/********************************************************/
+//							  		  System.out.println("in1:" + in1 +" jn1:"+jn1);
+//							  		 String[] nearB11= nearBox(in1,jn1)	;
+//									 int nearBSum11=Integer.parseInt(nearB11[9]);
+//									 int[] injn11;
+//									 int in11;
+//									 int jn11;
+//									 for(int i11=0;i11<nearBSum11;i11++)
+//									 {  	
+//										  injn11=Runner.findNumberfromIJ(Integer.parseInt(nearB11[i].substring(1,4)));
+//										  in11=injn11[0];
+//										  jn11=injn11[1];
+//										  if(bombsArray[in11][jn11]!=100) {
+//										  	  if(bombsArray[in11][jn11]==0) 
+//											  {
+//										  		  sightBombsArray[in11][jn11]=" "; 
+//											  }
+//										  	  else
+//										  	  {sightBombsArray[in11][jn11]=String.valueOf(bombsArray[in11][jn11]);}	 
+//										  }
+//									 }
+								 
+							  /********************************************************/
+								  }
+							  	  else
+							  	  {sightBombsArray[in1][jn1]=String.valueOf(bombsArray[in1][jn1]);}	 
+							     
+							  }
+							 
+						 }
+						 	 
+					  }
+					  else
+					  {
+						  sightBombsArray[in][jn]=String.valueOf(bombsArray[in][jn]);
+					  
+					  }
+				  }
+			 }
+		/************************************************************/	   
 	      }
+       	 else if(bombsArray[row][column]!=100 ) {
+       		sightBombsArray[row][column]=String.valueOf(bombsArray[row][column]);
+       	 }
+      }
+/***************************************************************************************/ 
+      else   //  bomba olan  kutular için  flag  
+	  {   if(sightBombsArray[row][column].equals("BOMB")) 
+		   {
+		     sightBombsArray[row][column]="S"+select.substring(1,4);
+		   }
+	       else
+	       {
+		    sightBombsArray[row][column]="BOMB";
+	       }
 	  }
+      
         this.sightBombsArray = sightBombsArray;
 
 }
@@ -89,7 +141,7 @@ public class BombsArray {
 
  /************ bombaları yerleştir **********************/
          for(int i=0;i<Runner.BOMBCOUNT;i++) {
-		  	 ijBomb=Runner.findNumber(bombs[i]);
+		  	 ijBomb=Runner.findNumberfromIJ(bombs[i]);
 		   	 bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
 		}
          
@@ -97,10 +149,9 @@ public class BombsArray {
    /************ komşulardaki bombaları say ,toplamları komşulara yerleştir***********************************/
 		 
          int bombSum=0;
-         int iFirst;
-         int jFirst;
-         int iLast;
-         int jLast;
+         int[] injn;
+     	 int in;
+		 int jn;
 		 for(int i=0;i<Runner.SIZE;i++) {
 			 for(int j=0;j<Runner.SIZE;j++) {
 				
@@ -108,24 +159,21 @@ public class BombsArray {
 				 {
 					continue;
 				 }
-				 if(i==0) iFirst=i; else iFirst=i-1;
-				 if(j==0) jFirst=j; else jFirst=j-1;
-				 
-				 if(i==Runner.SIZE-1) iLast=i; else iLast=i+1;
-				 if(j==Runner.SIZE-1) jLast=j; else jLast=j+1;
-				 
-				 for(int ii=iFirst;ii<=iLast;ii++) {
-					 for(int jj=jFirst;jj<=jLast;jj++) {
-						 
-						 if(bombsArray[ii][jj]==Runner.SIZE*Runner.SIZE) 
+		           String[] nearB= nearBox(i,j)	;
+				   int nearBSum=Integer.parseInt(nearB[9]);
+				   for(int ii=0;ii<nearBSum;ii++)
+				   {  	
+					     injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+					     in=injn[0];
+						 jn=injn[1];
+						 if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) 
 						 {
 							 bombSum++;
 						 }
 					  }
-				 }
 					 bombsArray[i][j]=bombSum;
 					 bombSum=0;
-			 }
+		 }
 		 }	
 		
 		 for(int i =0 ;i<Runner.SIZE ;i++)
@@ -139,31 +187,56 @@ public class BombsArray {
 		this.bombsArray = bombsArray;
 	} 
 	
-	
-
 	public  int[] getMwBomb() {
-			int bomb;
-			int bombCount=2*Runner.SIZE;
-			int[]  bombArray = new  int[bombCount];
-			for(int i =0 ;i<bombCount ;i++)
+		int bomb;
+		int bombCount=2*Runner.SIZE;
+		int[]  bombArray = new  int[bombCount];
+		for(int i =0 ;i<bombCount ;i++)
+		{
+			bomb= Runner.getRandomNumber();
+			for(int ii =0 ;ii<bombCount ;ii++)
 			{
+				while(bomb==bombArray[ii]) {
 				bomb= Runner.getRandomNumber();
-				for(int ii =0 ;ii<bombCount ;ii++)
-				{
-					while(bomb==bombArray[ii]) {
-						bomb= Runner.getRandomNumber();
-					}
-					
-				}
-				bombArray[i]=bomb;
-				//System.out.print(bombArray[i]+" ");
+			}	
 			}
-			//System.out.println();
-			return Runner.sort(bombArray);
+			bombArray[i]=bomb;
 		}
+			return Runner.sort(bombArray);
+	}
 
 /*********************************************************************/		
 
-	
+	public String[] nearBox(int i,int j){
+		String[] n=new String[10];
+		int iFirst;
+	    int jFirst;
+	    int iLast;
+	    int jLast;
+	    int a=0;
+	    int summ=0;
+		if(i==0) iFirst=i; else iFirst=i-1;
+		if(j==0) jFirst=j; else jFirst=j-1;
+		 
+		if(i==Runner.SIZE-1) iLast=i; else iLast=i+1;
+		if(j==Runner.SIZE-1) jLast=j; else jLast=j+1;
+				
+		for(int ii=iFirst;ii<=iLast;ii++) {
+			for(int jj=jFirst;jj<=jLast;jj++) {
+//				if(ii==i && jj==j) {}
+//				else
+//				{
+				//System.out.println("a :"+a );
+					n[a]=Runner.findIJfromNumber(ii,jj);
+					if(!n[a].equals(null))  summ++;
+					a++;
+					
+				//}
+			}
+		 }
+		 n[9]=String.valueOf(summ);
+		
+		return n;
+	}
 
 }

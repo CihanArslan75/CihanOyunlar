@@ -1,5 +1,8 @@
 package cihan.kurs.odev5.minesweeper;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class Runner {
 
 	public static final int SIZE=10;
@@ -9,12 +12,18 @@ public class Runner {
 	
 	public static void main(String[] args) {
 		
+//		BombsArray mw=new  BombsArray() ;
+//		String a[]=mw.nearBox(0,0);
+//		for(int i=0;i<10;i++) {
+//			System.out.print(a[i]+" ");
+//		}
+//		System.out.println();
 		MinesWeeper mw=new  MinesWeeper() ;
 		mw.playMW();
 	}
 	   
 	/*********************************************************************/		
-	public static int[] findNumber(int a) {
+	public static int[] findNumberfromIJ(int a) {
         //Statik array için Gelen sayıya 1. ve 2. idisini bulur /
 	  int[] ij =new int[2];	
 	  ij[0]=a/Runner.SIZE;
@@ -22,6 +31,14 @@ public class Runner {
 	  return ij;
 	}
 	
+	public static String findIJfromNumber(int i,int j) {
+        // Gelen i ve j den Snumarasını bulur /
+	  //System.out.println("a:"+(i+j));	
+	  NumberFormat formatter = new DecimalFormat("000");
+	  String number ="S" + formatter.format( Integer.parseInt((String.valueOf(i) + String.valueOf(j))));	
+	 
+	  return number;
+	}
 	
 	public static int[] sort(int[] bomb ) {
 		int temp;

@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class MinesWeeper {
 	
-
 	public  void  playMW() {
 		Scanner sc=new Scanner(System.in);
 		int[]   ijBomb = new int[2]; 
@@ -51,15 +50,13 @@ public class MinesWeeper {
 				 System.out.println("Seçiminiz Yanlış1!");
 				 continue;
 			 }
-			 
-			 
-		  	 ijBomb=Runner.findNumber(selectInt);
-		  	 row=ijBomb[0];
+			 			 
+			 ijBomb=Runner.findNumberfromIJ(selectInt);
+			 row=ijBomb[0];
 			 column=ijBomb[1];
-			 
+			 			 
 		  	 b.setSightBombsArray(select,row,column);	
 		  		  
-		  			  	 
 		  	 if(bArray[row][column]==Runner.BSIZE  &&  selectFirst.equals("S") ) 
 		  	 {
 		   		 System.out.println("Yandınız");
