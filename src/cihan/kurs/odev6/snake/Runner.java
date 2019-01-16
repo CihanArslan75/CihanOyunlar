@@ -1,17 +1,41 @@
 package cihan.kurs.odev6.snake;
 
+import java.util.Scanner;
+
 public class Runner {
-	public static final  int SIZE=25;
-	public static final  int BSIZE=SIZE*2-1;
 	
 	public static void main(String[] args) {
-		new Frame();
+		Scanner sc=new Scanner(System.in);
+		Frame frame=new Frame();
+		Boolean exit=true;
+		do {
+			System.out.println("Yılanı Hareket Ettirmek için 2 ↓, 4 ← , 6 → , 8 ↑ Tuşlarını Kullanınız !");
+			System.out.println("Oyunu Sonlandırmak için x Tuşunu Kullanınız !");
+			String input = sc.nextLine();
+			if(input.equals("x") || input.equals("X")) exit=false;
+			
+			if(input.equals("2")) {
+				frame.setFrameInSnakeDown() ;
+			    frame.drawFrame();
+			}else if(input.equals("4")) {
+				frame.setFrameInSnakeLeft() ;
+				frame.drawFrame();
+			}else if(input.equals("6")) {
+				frame.setFrameInSnakeRight() ;
+				frame.drawFrame();
+			}else if(input.equals("8")) {
+				frame.setFrameInSnakeUp() ;
+				frame.drawFrame();
+			}
 		
-	}
-	
-	public static int getRandomNumber(){
-	    return (int)(Math.random() *(Runner.SIZE-5)+3);
-	   
-	}
+	}while(exit);
 
 }
+}
+// ▼
+// ►
+//◄
+// ▲ 
+// ■
+
+

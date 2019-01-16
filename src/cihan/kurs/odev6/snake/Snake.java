@@ -2,24 +2,40 @@ package cihan.kurs.odev6.snake;
 
 public class Snake {
 	
-	public String[] snakeArray;
+	protected int snakeSize=5;
+	public String[] snakeArray=new String[snakeSize];
 	
 	public Snake() {
-		
+		//System.out.println("Snake Constructor");
 	}
 	
-	public String setSnake(int x) {
-		for(int i=0;i<5;i++)
+	public void setSnakeSize() {
+		snakeSize++;
+	}
+	
+	public int getSnakeSize() {
+		return this.snakeSize;
+	}
+	
+	
+	public String[] setSnake(int number) {
+		for(int i=0;i<snakeSize;i++)
 		{
 			if(i==0) 
-			{
-				snakeArray[i]="<";
+			{ 
+				 if(number == 2)  {snakeArray[i]="▼";}
+				 if(number == 4)  {snakeArray[i]="◄";}
+				 if(number == 6)  {snakeArray[i]="►";}
+				 if(number == 8)  {snakeArray[i]="▲";}
 			}
 			else
-			{
-				snakeArray[i]="#";
-			}
+			{snakeArray[i]="■";}
 		}
-    return snakeArray[x];
+		
+    return snakeArray;
 	}
+	
+	
+	
+	
 }
