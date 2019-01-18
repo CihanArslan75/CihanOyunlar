@@ -15,17 +15,46 @@ public class Runner {
 			if(input.equals("x") || input.equals("X")) exit=false;
 			
 			if(input.equals("2")) {
-				frame.setFrameInSnakeDown() ;
-			    frame.drawFrame();
+				if( frame.frameArray[frame.xSnake][frame.ySnake]=="▲" ) 
+				{ 
+					System.out.println("Aşağı Gidemezsiniz!");
+				}
+				else
+				{
+					frame.setFrameInSnakeDown() ;
+				    frame.drawFrame();
+				}
 			}else if(input.equals("4")) {
-				frame.setFrameInSnakeLeft() ;
-				frame.drawFrame();
+				if( frame.frameArray[frame.xSnake][frame.ySnake]=="►" ) 
+				{ 
+					System.out.println("Sola Gidemezsiniz!");
+				}
+				else
+				{
+					frame.setFrameInSnakeLeft() ;
+					frame.drawFrame();
+				}
+				
 			}else if(input.equals("6")) {
-				frame.setFrameInSnakeRight() ;
-				frame.drawFrame();
+				if( frame.frameArray[frame.xSnake][frame.ySnake]=="◄" ) 
+				{ 
+					System.out.println("Sağa Gidemezsiniz!");
+				}
+				else
+				{
+					frame.setFrameInSnakeRight() ;
+					frame.drawFrame();
+				}
 			}else if(input.equals("8")) {
-				frame.setFrameInSnakeUp() ;
-				frame.drawFrame();
+				if( frame.frameArray[frame.xSnake][frame.ySnake]=="▼" ) 
+				{ 
+					System.out.println("Yukarı Gidemezsiniz!");
+				}
+				else 
+				{
+					frame.setFrameInSnakeUp() ;
+					frame.drawFrame();
+				}
 			}
 		
 	}while(exit);
