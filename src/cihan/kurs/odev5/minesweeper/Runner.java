@@ -7,18 +7,11 @@ public class Runner {
 
 	public static final int SIZE=10;
 	public static final int BSIZE=SIZE*SIZE;
-	public static final int BOMBCOUNT=2*SIZE;
+	public static final int BOMBCOUNT=1 ;//2*SIZE;
 	
 	
 	public static void main(String[] args) {
-		
-//		BombsArray mw=new  BombsArray() ;
-//		String a[]=mw.nearBox(0,0);
-//		for(int i=0;i<10;i++) {
-//			System.out.print(a[i]+" ");
-//		}
-//		System.out.println();
-		MinesWeeper mw=new  MinesWeeper() ;
+	    MinesWeeper mw=new  MinesWeeper() ;
 		mw.playMW();
 	}
 	   
@@ -33,8 +26,7 @@ public class Runner {
 	
 	public static String findIJfromNumber(int i,int j) {
         // Gelen i ve j den Snumarasını bulur /
-	  //System.out.println("a:"+(i+j));	
-	  NumberFormat formatter = new DecimalFormat("000");
+		  NumberFormat formatter = new DecimalFormat("000");
 	  String number ="S" + formatter.format( Integer.parseInt((String.valueOf(i) + String.valueOf(j))));	
 	 
 	  return number;
@@ -54,8 +46,6 @@ public class Runner {
 				}
 				bombArrayNumber=bomb[i];
 			 }
-			
-			//System.out.print(bombArray[i]+" ");
 		}
 		
 		return bomb; 
