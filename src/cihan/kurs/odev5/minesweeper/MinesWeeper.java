@@ -14,18 +14,19 @@ public class MinesWeeper {
 		int column;
 		boolean playEnd=true;
 		String selectFirst;
-	  
 		BombsArray b=new BombsArray();
 		b.setBombsArray();
 		int[][] bArray =b.getBombsArray();
 
 		b.setSightBombsArray();
-		String[][] bSightArray =b.getSightBombsArray();
+		String[][] bSightArray   =b.getSightBombsArray();
+		
+		int[][] bControlArray =b.getBombsControlArray();
 		
 		mwDraw(bSightArray);
 		
 				
-		do{
+		do{  	int sum=0;
 			 System.out.println("Seçiminizi S ile Bombaları B ile Giriniz.Çıkmak için X tuşuna Basınız. !!");
 			 String select = sc.next();
 			 selectFirst=select.substring(0,1).toUpperCase( );
@@ -38,8 +39,26 @@ public class MinesWeeper {
 				 
 			  } 
 			 
+			 for(int i=0; i<Runner.SIZE;i++) {
+				 for(int j=0; j<Runner.SIZE;j++) {
+					 if(bControlArray[i][j]==1) sum++;
+				 }
+			 }
+			 
+			 if(sum== (Runner.BSIZE-1))  {
+				 System.out.println("Tebrikler Kazandınız !");
+				 playEnd=false;
+				 break;
+			 }
+			 
+			 if( select.length()>4 ) 
+			 {
+				 System.out.println("Seçiminiz Yanlış1!");
+				 continue;
+			 }
+		
 			 int selectInt=Integer.parseInt((select.substring(1,4)));
-			 if(selectInt>=Runner.BSIZE  ) 
+			 if(selectInt>=Runner.BSIZE ) 
 			 {
 				 System.out.println("Seçiminiz Yanlış1!");
 				 continue;

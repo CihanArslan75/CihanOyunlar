@@ -11,7 +11,7 @@ public class BombsArray{
 	
 	private int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
 	private String[][] sightBombsArray = new String[Runner.SIZE][Runner.SIZE];
-	private int[][] MayinKontrol= new int[Runner.SIZE][Runner.SIZE];
+	private int[][] BombsControl= new int[Runner.SIZE][Runner.SIZE];
 	
 	public int[][] getBombsArray() {
 		return bombsArray;
@@ -19,6 +19,10 @@ public class BombsArray{
 	
 	public String[][] getSightBombsArray() {
 		return sightBombsArray;
+	}
+	
+	public int[][] getBombsControlArray() {
+		return BombsControl;
 	}
 	
 	public  void setSightBombsArray() {
@@ -43,9 +47,10 @@ public class BombsArray{
 	      {
     		  nearBoxOpen(row,column);
 	      }
-    	  else if(bombsArray[row][column]!=100 ) 
+    	  else if(bombsArray[row][column]!=Runner.SIZE*Runner.SIZE ) 
     	  {
          	  sightBombsArray[row][column]=String.valueOf(bombsArray[row][column]);
+         	   BombsControl[row][column]=1;
           }	
     }
 /***************************************************************************************/ 
@@ -53,10 +58,12 @@ public class BombsArray{
 	{   if(sightBombsArray[row][column].equals("BOMB")) 
 		   {
 		     sightBombsArray[row][column]="S"+select.substring(1,4);
+		     BombsControl[row][column]=0;
 		   }
 	       else
 	       {
 		    sightBombsArray[row][column]="BOMB";
+		    BombsControl[row][column]=1;
 	       }
 	  }
       
@@ -74,7 +81,8 @@ public class BombsArray{
  /************ bombaları yerleştir **********************/
          for(int i=0;i<Runner.BOMBCOUNT;i++) {
 		  	 ijBomb=Runner.findNumberfromIJ(bombs[i]);
-		   	 bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
+		  	 System.out.println(ijBomb[0]+" "+ ijBomb[1]);
+		   	// bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
 		}
          
 	 
@@ -92,15 +100,26 @@ public class BombsArray{
 				 {
 					continue;
 				 }
-				 MayinKontrol[i][j] =0 ;
+				 BombsControl[i][j] =0 ;
 		           String[] nearB= nearBox(i,j)	;
+		           
+//		           for(int ij=0;ij<10;ij++) {
+//		        	   System.out.println("a:"+nearB[ij]);
+//		           }
+//		           
 				   int nearBSum=Integer.parseInt(nearB[9]);
+				   //System.out.println("nearBsum:"+nearBSum);
 				   for(int ii=0;ii<nearBSum;ii++)
 				   {  	
 					     injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+					    
 					     in=injn[0];
 						 jn=injn[1];
-						 if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) 
+						// System.out.println("aaa:"+nearB[ii].substring(1,4)); 
+						 //System.out.println("bbb:"+in +" "+jn); 
+					     //System.out.println("ccc:"+bombsArray[in][jn]);
+					     
+						 if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE ) 
 						 {
 							 bombSum++;
 						 }
@@ -179,9 +198,9 @@ public class BombsArray{
 			  int[] injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
 			  int in=injn[0];
 			  int jn=injn[1];
-			  if(MayinKontrol[in][jn]==1) {continue;}
-			  MayinKontrol[in][jn]=1;
-			  if(bombsArray[in][jn]==100) {}
+			  if(BombsControl[in][jn]==1) {continue;}
+			  BombsControl[in][jn]=1;
+			  if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) {}
 			  else if(bombsArray[in][jn]!=0) 
 			  {
 				  sightBombsArray[in][jn]=String.valueOf(bombsArray[in][jn]);
