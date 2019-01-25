@@ -1,5 +1,5 @@
 package cihan.kurs.odev6.snake;
-
+ 
 public class Frame extends Snake{
 	protected int size=25;
 	protected int bsize=(size*2)-1;
@@ -38,7 +38,7 @@ public class Frame extends Snake{
 			if(ii%2 == 0) {
 				frameArray[xSnake][ySnake+ii]=snakeArray[ii/2];
 			}
-		}
+		} 
 	}
 	
 	public void setFrameInSnakeDown() {

@@ -1,5 +1,5 @@
 package cihan.kurs.odev5.minesweeper;
-
+ 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -31,8 +31,10 @@ public class BombsArray{
 			for(int i=0;i<Runner.SIZE;i++) {
 				for(int j =0;j<Runner.SIZE;j++) {
 					sightBombsArray[i][j]="S"+formatter.format(numberMW);
+					//System.out.print("S"+formatter.format(numberMW)+" ");
 				     numberMW++;
 				}
+				//System.out.println();
 			}
 			this.sightBombsArray = sightBombsArray;
 	}
@@ -55,14 +57,14 @@ public class BombsArray{
     }
 /***************************************************************************************/ 
     else   //  bomba olan  kutular için  flag  
-	{   if(sightBombsArray[row][column].equals("BOMB")) 
+	{   if(sightBombsArray[row][column].equals("B"+select.substring(1,4))) 
 		   {
 		     sightBombsArray[row][column]="S"+select.substring(1,4);
 		     BombsControl[row][column]=0;
 		   }
 	       else
 	       {
-		    sightBombsArray[row][column]="BOMB";
+		    sightBombsArray[row][column]="B"+select.substring(1,4);
 		    BombsControl[row][column]=1;
 	       }
 	  }
@@ -81,8 +83,8 @@ public class BombsArray{
  /************ bombaları yerleştir **********************/
          for(int i=0;i<Runner.BOMBCOUNT;i++) {
 		  	 ijBomb=Runner.findNumberfromIJ(bombs[i]);
-		  	 System.out.println(ijBomb[0]+" "+ ijBomb[1]);
-		   	// bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
+		  	// System.out.println(ijBomb[0]+" "+ ijBomb[1]);
+		   	 bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
 		}
          
 	 
@@ -101,7 +103,8 @@ public class BombsArray{
 					continue;
 				 }
 				 BombsControl[i][j] =0 ;
-		           String[] nearB= nearBox(i,j)	;
+				// System.out.println("i:"+i + " j:"+j); 
+		         String[] nearB= nearBox(i,j)	;
 		           
 //		           for(int ij=0;ij<10;ij++) {
 //		        	   System.out.println("a:"+nearB[ij]);
@@ -115,9 +118,9 @@ public class BombsArray{
 					    
 					     in=injn[0];
 						 jn=injn[1];
-						// System.out.println("aaa:"+nearB[ii].substring(1,4)); 
-						 //System.out.println("bbb:"+in +" "+jn); 
-					     //System.out.println("ccc:"+bombsArray[in][jn]);
+//						 System.out.println("aaa:"+nearB[ii]); 
+//						 System.out.println("bbb:"+in +" "+jn); 
+//					     System.out.println("ccc:"+bombsArray[in][jn]);
 					     
 						 if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE ) 
 						 {
@@ -163,6 +166,7 @@ public class BombsArray{
 /*********************************************************************/		
 
 	public String[] nearBox(int i,int j){
+		//System.out.println("i:"+i +" j:"+j);
 		String[] n=new String[10];
 		int iFirst;
 	    int jFirst;
@@ -170,14 +174,18 @@ public class BombsArray{
 	    int jLast;
 	    int a=0;
 	    int summ=0;
+	    int s=Runner.SIZE/10;
 		if(i==0) iFirst=i; else iFirst=i-1;
 		if(j==0) jFirst=j; else jFirst=j-1;
 		 
 		if(i==Runner.SIZE-1) iLast=i; else iLast=i+1;
 		if(j==Runner.SIZE-1) jLast=j; else jLast=j+1;
-				
+//		System.out.println("iFirst:"+iFirst +" iLast:"+iLast);
+//		System.out.println("jFirst:"+jFirst +" jLast:"+jLast);
+//				
 		for(int ii=iFirst;ii<=iLast;ii++) {
 			for(int jj=jFirst;jj<=jLast;jj++) {
+				//System.out.println("ii:"+ii +" jj:"+jj);
 					n[a]=Runner.findIJfromNumber(ii,jj);
 					if(!n[a].equals(null) )  summ++;
 					a++;

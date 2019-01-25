@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Runner {
 
-	public static int SIZE=20;
+	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
 	public static  int BOMBCOUNT=2*SIZE;
 	
@@ -22,26 +22,35 @@ public class Runner {
 //			
 //			System.out.println();
 //		 }
-		
+//		  NumberFormat formatter = new DecimalFormat("000");
+//	      String number ="S" + formatter.format( Integer.parseInt((String.valueOf(1) + String.valueOf(8))));
+//		System.out.println(number);
+//		BombsArray b=new BombsArray();
+//		   String[] nearB= b.nearBox(3,9)	;
+//           
+//           for(int ij=0;ij<10;ij++) {
+//        	   System.out.println("a:"+nearB[ij]);
+//           }
+//		   
 	    MinesWeeper mw=new  MinesWeeper() ;
 		mw.playMW();
+	
 	}
 	   
 	/*********************************************************************/		
 	public static int[] findNumberfromIJ(int a) {
         //Statik array için Gelen sayıya 1. ve 2. idisini bulur /
 	  int[] ij =new int[2];	
-	  ij[0]=a/10;
-	  ij[1]=a%10;
+	  ij[0]=a/SIZE;
+	  ij[1]=a%SIZE;
 	  return ij;
 	}
 	
 	public static String findIJfromNumber(int i,int j) {
         // Gelen i ve j den Snumarasını bulur /
 		  NumberFormat formatter = new DecimalFormat("000");
-	  String number ="S" + formatter.format( Integer.parseInt((String.valueOf(i) + String.valueOf(j))));	
-	 
-	  return number;
+	      String number ="S" + formatter.format( Integer.parseInt((String.valueOf(i) + String.valueOf(j))));	
+	   return number;
 	}
 	
 	public static int[] sort(int[] bomb ) {

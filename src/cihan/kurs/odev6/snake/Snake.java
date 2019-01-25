@@ -6,7 +6,7 @@ public class Snake {
 	public String[] snakeArray=new String[snakeSize];
 	public int[] snakeTail=new int[2];
 	
-	
+	 
 	public Snake() {
 		//System.out.println("Snake Constructor");
 	}

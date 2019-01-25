@@ -7,7 +7,7 @@ public class Runner {
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		Frame frame=new Frame();
-		Boolean exit=true;
+		boolean exit=true;
 		do {
 			System.out.println("Yılanı Hareket Ettirmek için 2 ↓, 4 ← , 6 → , 8 ↑ Tuşlarını Kullanınız !");
 			System.out.println("Oyunu Sonlandırmak için x Tuşunu Kullanınız !");

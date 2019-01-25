@@ -45,12 +45,7 @@ public class MinesWeeper {
 				 }
 			 }
 			 
-			 if(sum== (Runner.BSIZE-1))  {
-				 System.out.println("Tebrikler Kazandınız !");
-				 playEnd=false;
-				 break;
-			 }
-			 
+					 
 			 if( select.length()>4 ) 
 			 {
 				 System.out.println("Seçiminiz Yanlış1!");
@@ -80,11 +75,18 @@ public class MinesWeeper {
 		  	 {
 		   		 System.out.println("Yandınız");
 		   		 playEnd=false;
+		   		break;
 		   	 }
 		   	 else
 		   	 {   
 		   		 mwDraw(bSightArray);
 		   	 }
+		  	 
+		  	 if(sum== (Runner.BSIZE-1))  {
+				 System.out.println("Tebrikler Kazandınız !");
+				 playEnd=false;
+				 break;
+			 }
 		}while(playEnd);
 		sc.close();
      	
@@ -97,6 +99,7 @@ public class MinesWeeper {
 		for(int i=0;i<Runner.SIZE;i++) {
 			for(int j =0;j<Runner.SIZE;j++) {
 				System.out.printf("%5s",bSightArray[i][j]+" ");
+				//System.out.print(bSightArray[i][j]+" ");
 			}
 			System.out.println();
 		}
