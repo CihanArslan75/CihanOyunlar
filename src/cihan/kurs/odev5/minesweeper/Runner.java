@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Runner {
-
+ 
 	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
 	public static  int BOMBCOUNT=2*SIZE;
