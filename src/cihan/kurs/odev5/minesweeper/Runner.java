@@ -12,26 +12,6 @@ public class Runner {
 	
 	
 	public static void main(String[] args) {
-//		NumberFormat formatter = new DecimalFormat("000");
-//		int numberMW=0;
-//		for(int ii=0;ii<SIZE;ii++) {
-//			for(int jj=0;jj<SIZE;jj++) {
-//				System.out.print("S"+formatter.format( numberMW)+" ");
-//				 numberMW++;				
-//			}
-//			
-//			System.out.println();
-//		 }
-//		  NumberFormat formatter = new DecimalFormat("000");
-//	      String number ="S" + formatter.format( Integer.parseInt((String.valueOf(1) + String.valueOf(8))));
-//		System.out.println(number);
-//		BombsArray b=new BombsArray();
-//		   String[] nearB= b.nearBox(3,9)	;
-//           
-//           for(int ij=0;ij<10;ij++) {
-//        	   System.out.println("a:"+nearB[ij]);
-//           }
-//		   
 	    MinesWeeper mw=new  MinesWeeper() ;
 		mw.playMW();
 	

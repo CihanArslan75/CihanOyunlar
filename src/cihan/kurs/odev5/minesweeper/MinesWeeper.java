@@ -99,7 +99,6 @@ public class MinesWeeper {
 		for(int i=0;i<Runner.SIZE;i++) {
 			for(int j =0;j<Runner.SIZE;j++) {
 				System.out.printf("%5s",bSightArray[i][j]+" ");
-				//System.out.print(bSightArray[i][j]+" ");
 			}
 			System.out.println();
 		}

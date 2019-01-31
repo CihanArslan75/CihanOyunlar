@@ -1,49 +1,54 @@
 package cihan.kurs.odev6.snake;
 
+import cihan.kurs.odev8.CihanLinkedList.*;
+
 public class Snake {
 	
-	protected int snakeSize=5;
-	public String[] snakeArray=new String[snakeSize];
+	public static int snakeSize=5;
+	//public String[] snakeArray=new String[snakeSize];
+	public CihanLinkedList<Integer> snakeArray= new CihanLinkedList<Integer>();
 	public int[] snakeTail=new int[2];
 	
-	 
 	public Snake() {
 		//System.out.println("Snake Constructor");
 	}
 	
-	public void setSnakeSize() {
+	public void setSnakeSizeAdd() {
 		snakeSize++;
 	}
 	
 	public int getSnakeSize() {
-		return this.snakeSize;
+		return snakeSize;
 	}
 	
 	
-	public String[] setSnake(int number) {
-			 if(number == 2)  {snakeArray[0]="▼";}
-			 if(number == 4)  {snakeArray[0]="◄";}
-			 if(number == 8)  {snakeArray[0]="▲";}
-			 if(number == 6)  {snakeArray[0]="►";}
-			// if(number == 6)  {snakeArray[snakeSize-1]="►";snakeArray[0]="■";}
+	public CihanLinkedList setSnake(int number) {
+		
+	   if(number == 2)  {snakeArray.setFirst(2);}
+	   if(number == 4)  {snakeArray.setFirst(4);}
+	   if(number == 8)  {snakeArray.setFirst(8);}
+	   if(number == 6)  {snakeArray.setFirst(6);}
 		
     return snakeArray;
 	}
 	
-	public String[] setSnakeFisrt() {
+	public CihanLinkedList setSnakeFirst() {
 		for(int i=0;i<snakeSize;i++)
 		{
 			if(i==0) 
 			{ 				
-				snakeArray[i]="◄";
+				snakeArray.add(4);
+				//snakeArray.setFirst(4);			
 			}
 			else if(i<snakeSize-1) 
 			{
-				snakeArray[i]="■";
+				//snakeArray.add("■");
+				snakeArray.add(3);
 			}
 			else if(i==snakeSize-1) 
 			{
-				snakeArray[i]="@";
+				//snakeArray[i]="@";
+				snakeArray.add(9);
 			}
 		}	
 			

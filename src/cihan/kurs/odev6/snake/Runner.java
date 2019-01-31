@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Runner {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ArrayIndexOutOfBoundsException {
 		Scanner sc=new Scanner(System.in);
 		Frame frame=new Frame();
 		boolean exit=true;
@@ -13,9 +13,9 @@ public class Runner {
 			System.out.println("Oyunu Sonlandırmak için x Tuşunu Kullanınız !");
 			String input = sc.nextLine();
 			if(input.equals("x") || input.equals("X")) exit=false;
-			
+			try {
 			if(input.equals("2")) {
-				if( frame.frameArray[frame.xSnake][frame.ySnake]=="▲" ) 
+				if( frame.snakeArray.getFirst().data == 8 ) 
 				{ 
 					System.out.println("Aşağı Gidemezsiniz!");
 				}
@@ -23,9 +23,10 @@ public class Runner {
 				{
 					frame.setFrameInSnakeDown() ;
 				    frame.drawFrame();
+				    
 				}
 			}else if(input.equals("4")) {
-				if( frame.frameArray[frame.xSnake][frame.ySnake]=="►" ) 
+				if( frame.snakeArray.getFirst().data == 6 ) 
 				{ 
 					System.out.println("Sola Gidemezsiniz!");
 				}
@@ -36,7 +37,7 @@ public class Runner {
 				}
 				
 			}else if(input.equals("6")) {
-				if( frame.frameArray[frame.xSnake][frame.ySnake]=="◄" ) 
+				if( frame.snakeArray.getFirst().data == 4 ) 
 				{ 
 					System.out.println("Sağa Gidemezsiniz!");
 				}
@@ -46,7 +47,7 @@ public class Runner {
 					frame.drawFrame();
 				}
 			}else if(input.equals("8")) {
-				if( frame.frameArray[frame.xSnake][frame.ySnake]=="▼" ) 
+				if( frame.snakeArray.getFirst().data == 2 ) 
 				{ 
 					System.out.println("Yukarı Gidemezsiniz!");
 				}
@@ -55,6 +56,11 @@ public class Runner {
 					frame.setFrameInSnakeUp() ;
 					frame.drawFrame();
 				}
+			}
+			}
+			catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Oyun Bitti!!!!");
+				exit=false;
 			}
 		
 	}while(exit);
