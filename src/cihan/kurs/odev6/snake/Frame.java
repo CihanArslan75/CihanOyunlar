@@ -1,5 +1,6 @@
 package cihan.kurs.odev6.snake;
  
+
 import cihan.kurs.odev8.CihanLinkedList.CihanLinkedList;
 
 public class Frame extends Snake{

@@ -11,6 +11,7 @@ public class Runner {
 	public static  int BOMBCOUNT=2*SIZE;
 	 
 	
+	
 	public static void main(String[] args) {
 	    MinesWeeper mw=new  MinesWeeper() ;
 		mw.playMW();
