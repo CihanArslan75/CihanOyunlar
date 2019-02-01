@@ -1,7 +1,7 @@
 package cihan.kurs.odev6.snake;
  
 import java.util.Scanner;
-
+ 
 public class Runner {
 	
 	public static void main(String[] args) throws ArrayIndexOutOfBoundsException {
