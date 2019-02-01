@@ -1,5 +1,5 @@
 package cihan.kurs.odev6.snake;
-
+ 
 import java.util.Scanner;
 
 public class Runner {
