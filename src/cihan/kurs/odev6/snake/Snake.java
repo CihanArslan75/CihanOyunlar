@@ -1,5 +1,5 @@
 package cihan.kurs.odev6.snake;
-
+ 
 import cihan.kurs.odev8.CihanLinkedList.*;
 
 public class Snake {

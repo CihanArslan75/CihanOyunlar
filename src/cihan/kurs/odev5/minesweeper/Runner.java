@@ -9,7 +9,7 @@ public class Runner {
 	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
 	public static  int BOMBCOUNT=2*SIZE;
-	
+	 
 	
 	public static void main(String[] args) {
 	    MinesWeeper mw=new  MinesWeeper() ;
