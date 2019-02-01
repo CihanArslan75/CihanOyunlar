@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BombsArray{
+public class BombsArray{ 
 	
 	private int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
 	private String[][] sightBombsArray = new String[Runner.SIZE][Runner.SIZE];

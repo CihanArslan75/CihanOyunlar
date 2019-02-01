@@ -6,7 +6,7 @@ import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class MinesWeeper {
-	
+	 
 	public  void  playMW() {
 		Scanner sc=new Scanner(System.in);
 		int[]   ijBomb = new int[2]; 
