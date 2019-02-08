@@ -41,6 +41,7 @@ public class Runner {
 		   
 		    if( hamleCount==1) {
 		    	dama.damaDraw();
+		    	playerChange();
 		    }
 		    else
 		    {

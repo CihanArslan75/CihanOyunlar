@@ -25,21 +25,20 @@ public class DamaGame extends Dama {
 	
 	@Override
 	public String[] hamlePlayableShow() {
-		String[] hamleFindArray=new String[10];
+		String[] hamleFindArray=new String[20];
 		int k=0;
 	    for (int i = 0; i < damaArray.length; i++) {
 	    	for (int j = 0; j < damaArray.length; j++) {
-				if(damaArray[i][j]==Runner.player) {
+	    		if(damaArray[i][j]==Runner.player) {
 					hamleFindArray =hamleFind(i,j);
 					for (int jj = 0; jj < hamleFindArray.length; jj++) {
-					if(hamleFindArray[jj]!=null) 
-					{  
-					  hamlePlayableArray[k]= findStonefromij(i,j);
-					  k++;
-					  break;
+						if(hamleFindArray[jj]!=null) 
+						{ 
+						  hamlePlayableArray[k]= findStonefromij(i,j);
+						  k++;
+						  break;
+						}
 					}
-					}
-					
 				}
 			}
 	    }
@@ -57,8 +56,6 @@ public class DamaGame extends Dama {
 	
 	@Override
 	public boolean hamleControl(String hamle) {
-		//System.out.println("hamle:" + hamle);
-		//System.out.println(hamlePlayableArray[0] + " "+  hamlePlayableArray[1] + " "+  hamlePlayableArray[2] + " "+  hamlePlayableArray[3] + " "+  hamlePlayableArray[4] + " "+  hamlePlayableArray[5] + " "+  hamlePlayableArray[6] + " "+  hamlePlayableArray[7]);
 		for (int i = 0; i < hamlePlayableArray.length; i++) {
 			if(hamle.equals(hamlePlayableArray[i]))
 			{ 

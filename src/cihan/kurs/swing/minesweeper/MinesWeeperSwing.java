@@ -15,8 +15,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	public JButton btnStart = new JButton("");
 	private String btnNumber;
 	private int summ;
-	private int recor=0;
-	
+		
 	BombsArray b = new BombsArray();
 	
 	JPanel anaPanel = new JPanel();
@@ -28,6 +27,8 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	private final JTextField txt2 = new JTextField();
 	private final JLabel lbl1 = new JLabel("B");
 	private final JLabel lbl2 = new JLabel("T");
+	static Timer timer;
+	
 		
 	public MinesWeeperSwing() {
 		
@@ -51,7 +52,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		txt1.setForeground(Color.RED);
 	    txt1.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txt1.setSize(new Dimension(10, 10));
-		txt1.setText(String.valueOf(Runner.BOMBCOUNT-recor));
+		txt1.setText(String.valueOf(Runner.BOMBCOUNT));
 		txt1.setEditable(false);
 		txt1.setColumns(5);
 		txt1.setHorizontalAlignment(JTextField.CENTER);
@@ -66,8 +67,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		anaPanel.add(mPanel,BorderLayout.CENTER);
         sPanel.setForeground(Color.LIGHT_GRAY);
         sPanel.setBackground(Color.LIGHT_GRAY);
-        
-      
+              
         btnStart.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -92,9 +92,18 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	    lbl2.setFont(new Font("Arial", Font.BOLD, 20));
 	    
 	    sPanel.add(lbl2);
-	    
 	    sPanel.add(txt2);
-	    	   
+	    JButtonInitialize()	;
+		       
+        setTitle("Mayın Tarlası");
+        setSize(700,700);
+        setLocation(300,100);
+        setVisible(true);
+     	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+	}
+	
+	public void JButtonInitialize(){
 		for(int i=0;i<Runner.SIZE;i++)
 		{
 			for(int j=0;j<Runner.SIZE;j++)
@@ -104,18 +113,8 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 			    buttons[i][j].addActionListener((ActionListener) this);
 			    buttons[i][j].addMouseListener((MouseListener) this);
 			    mPanel.add(buttons[i][j]);
-			   			   
 			}
-
 	     }
-		
-		       
-         setTitle("Mayın Tarlası");
-         setSize(700,700);
-         setLocation(300,100);
-         setVisible(true);
-     	 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
 	}
 	
 	
@@ -126,47 +125,44 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		int[] ijBomb=Runner.findNumberfromIJ(selectInt);
 		int i=ijBomb[0];
 		int j=ijBomb[1];
-		   
+		
 		b.setSightBombsArray(btnNumber,i,j);	
 		bombsArray=b.getBombsArray();
-		
+				
+		 txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount()));   
 		 if(bombsArray[i][j]==Runner.BSIZE  &&  btnNumber.substring(0,1).equals("S") ) 
 	  	 {   
 			 
 			 for (int k = 0; k < Runner.SIZE; k++) {
 			    for (int l = 0; l < Runner.SIZE; l++) {
-				if(bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
-					
-					buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
-				}
+					if(bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
+						buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
+					}
 				}
 			}
 			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
 		     JOptionPane.showMessageDialog(new JFrame(), "YANDINIZ", "Dialog",JOptionPane.ERROR_MESSAGE);
-	   		 //System.exit(0);
+		    //System.exit(0);
 	   	 }
 		 
 	    if(bombsArray[i][j]==0)
 	    {
 	    	buttons[i][j].setText(" ");
 	    }
-	    else
+	    else if(bombsArray[i][j]!=Runner.BSIZE)
 	    {   buttons[i][j].setIcon(null);
 	    	buttons[i][j].setText(String.valueOf(bombsArray[i][j]));
+	    	buttons[i][j].getText();
+		    buttons[i][j].setEnabled(false);
+		    buttons[i][j].setBackground(Color.LIGHT_GRAY);
 	    }
 	   
-	    buttons[i][j].getText();
-	    buttons[i][j].setEnabled(false);
-	    buttons[i][j].setBackground(Color.LIGHT_GRAY);
-	    
-	    summ=b.getBombsControlArraySum();	 
-	   
-	  	 if(summ== (Runner.BSIZE))  {
+	    summ=b.getBombsControlArraySum();
+	    int bs= bombCount();
+	    if(summ == Runner.BSIZE && bs==Runner.BOMBCOUNT )  {
 			JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
 			//System.exit(0);
-		 }
-		 		
-						
+		 }	
 	}
 
 
@@ -200,22 +196,24 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         		int[] ijBomb=Runner.findNumberfromIJ(selectInt);
         		int i=ijBomb[0];
         		int j=ijBomb[1];
+        		
         		b.setSightBombsArray(btnNumber,i,j);
         		buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/flag.png")));
         		buttons[i][j].setActionCommand("S0" +i +j);
-        		recor++;	
-        		txt1.setText(String.valueOf(Runner.BOMBCOUNT-recor));  
-    		    if(summ== (Runner.BSIZE))  {
+        	    txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount())); 
+        		int bs=bombCount();
+    		    if(summ== (Runner.BSIZE-1) && bs==Runner.BOMBCOUNT)  {
     				JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
     				//System.exit(0);
     			 }
-    		    
+    		   
             }
             else {
             	
             }
+           
         }
-        
+	   
 	    pressed = false;
 
     }
@@ -231,6 +229,18 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public int bombCount() {
+	int recor=0;	
+	  for (int k = 0; k < Runner.SIZE; k++) {
+		for (int l = 0; l < Runner.SIZE; l++) {
+			if(buttons[k][l].getIcon()!=null && buttons[k][l].getActionCommand().equals("S0"+k+l)) {
+				recor++;
+		    }
+	     }
+	  }
+   	return recor;
 	}
 	
 }
