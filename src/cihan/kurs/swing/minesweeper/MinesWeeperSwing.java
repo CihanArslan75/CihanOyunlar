@@ -3,20 +3,21 @@ package cihan.kurs.swing.minesweeper;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javax.swing.event.*;
-import net.miginfocom.swing.MigLayout;
 
+import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
 
 public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionListener {
 	
-	public static JButton[][] buttons=new JButton[Runner.SIZE][Runner.SIZE];
-	private int[][] bombsArray=new int[Runner.SIZE][Runner.SIZE];
+	public JButton[][] buttons=new JButton[Runner.SIZE][Runner.SIZE];
 	public JButton btnStart = new JButton("");
 	private String btnNumber;
 	private int summ;
 		
-	BombsArray b = new BombsArray();
+	BombsArray b ;
 	
 	JPanel anaPanel = new JPanel();
 	JPanel mPanel   = new JPanel();
@@ -27,26 +28,21 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	private final JTextField txt2 = new JTextField();
 	private final JLabel lbl1 = new JLabel("B");
 	private final JLabel lbl2 = new JLabel("T");
-	static Timer timer;
+	Timer timer=null;
 	
-		
 	public MinesWeeperSwing() {
-		
-//		int speed = 1000;
-//		Timer timer = new Timer(speed, this);
-//		//timer.setInitialDelay(pause);
-//		timer.start(); 
-		
+	
+	}
+	
+	public void MinesWeeperSwingStart() {
+		b= new BombsArray();
 		txt2.setFont(new Font("Arial", Font.BOLD, 20));
         txt2.setForeground(Color.RED);
 		txt2.setBackground(Color.BLACK);
 		txt2.setHorizontalAlignment(SwingConstants.CENTER);
 		txt2.setEditable(false);
 		txt2.setColumns(5);
-//		txt2.addActionListener((ActionListener) this);
-//		txt2.setText(String.valueOf(timer)); 
-//		
-		
+			
 		txt1.setBackground(Color.BLACK);
 		txt1.setFont(new Font("Arial", Font.PLAIN, 20));
 		txt1.setForeground(Color.RED);
@@ -67,14 +63,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		anaPanel.add(mPanel,BorderLayout.CENTER);
         sPanel.setForeground(Color.LIGHT_GRAY);
         sPanel.setBackground(Color.LIGHT_GRAY);
-              
-        btnStart.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         		MinesWeeperSwing mws = new MinesWeeperSwing();		
-        	}
-        });
-        
+                            
         btnStart.setForeground(Color.LIGHT_GRAY);
         btnStart.setBackground(Color.LIGHT_GRAY);
         btnStart.setBounds(0, 0, 10, 10);
@@ -99,7 +88,17 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         setSize(700,700);
         setLocation(300,100);
         setVisible(true);
-     	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     	
+     	 btnStart.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+            	txt1.setText(String.valueOf(Runner.BOMBCOUNT));
+            	txt2.setText("");
+            	mPanel.removeAll();
+            	MinesWeeperSwingStart();	
+              
+          	}
+         });
 
 	}
 	
@@ -126,32 +125,46 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		int i=ijBomb[0];
 		int j=ijBomb[1];
 		
-		b.setSightBombsArray(btnNumber,i,j);	
-		bombsArray=b.getBombsArray();
-				
+		if(timer==null) {
+			txt2.setText("1");	
+		    timer= new Timer(1000,new ActionListener() {
+		    int deger=1;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deger++;
+				txt2.setText(toString().valueOf(deger));	
+				}
+			});	
+		    timer.start();
+			}
+		
+		setSightBombsArray(btnNumber,i,j);	
+						
 		 txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount()));   
-		 if(bombsArray[i][j]==Runner.BSIZE  &&  btnNumber.substring(0,1).equals("S") ) 
+		 if(b.bombsArray[i][j]==Runner.BSIZE  &&  btnNumber.substring(0,1).equals("S") ) 
 	  	 {   
 			 
 			 for (int k = 0; k < Runner.SIZE; k++) {
 			    for (int l = 0; l < Runner.SIZE; l++) {
-					if(bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
+					if(b.bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
 						buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
 					}
 				}
 			}
 			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
+			 timer.stop();	
 		     JOptionPane.showMessageDialog(new JFrame(), "YANDINIZ", "Dialog",JOptionPane.ERROR_MESSAGE);
+		     timer=null;
 		    //System.exit(0);
 	   	 }
 		 
-	    if(bombsArray[i][j]==0)
+	    if(b.bombsArray[i][j]==0)
 	    {
 	    	buttons[i][j].setText(" ");
 	    }
-	    else if(bombsArray[i][j]!=Runner.BSIZE)
+	    else if(b.bombsArray[i][j]!=Runner.BSIZE)
 	    {   buttons[i][j].setIcon(null);
-	    	buttons[i][j].setText(String.valueOf(bombsArray[i][j]));
+	    	buttons[i][j].setText(String.valueOf(b.bombsArray[i][j]));
 	    	buttons[i][j].getText();
 		    buttons[i][j].setEnabled(false);
 		    buttons[i][j].setBackground(Color.LIGHT_GRAY);
@@ -160,9 +173,12 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	    summ=b.getBombsControlArraySum();
 	    int bs= bombCount();
 	    if(summ == Runner.BSIZE && bs==Runner.BOMBCOUNT )  {
+	    	timer.stop();
 			JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
-			//System.exit(0);
+			timer=null;	
+			
 		 }	
+ 	    
 	}
 
 
@@ -197,14 +213,16 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         		int i=ijBomb[0];
         		int j=ijBomb[1];
         		
-        		b.setSightBombsArray(btnNumber,i,j);
+        		setSightBombsArray(btnNumber,i,j);
         		buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/flag.png")));
         		buttons[i][j].setActionCommand("S0" +i +j);
         	    txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount())); 
         		int bs=bombCount();
     		    if(summ== (Runner.BSIZE-1) && bs==Runner.BOMBCOUNT)  {
+    		    	timer.stop();	
     				JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
-    				//System.exit(0);
+    				timer=null;
+    				
     			 }
     		   
             }
@@ -242,5 +260,72 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	  }
    	return recor;
 	}
+	
+	public void setSightBombsArray(String select,int row,int column) {
+		NumberFormat formatter = new DecimalFormat("000");
+		boolean exit=true;
+        String selectFirst=select.substring(0,1).toUpperCase( );
+/***************************************************************************************/
+        if(b.bombsArray[row][column]!=Runner.BSIZE ) {//bomba olmayan kutular için set
+    	  if(b.bombsArray[row][column]==0 )  
+	      {   
+    		  nearBoxOpen(row,column);
+	      }
+    	  else if(b.bombsArray[row][column]!=Runner.SIZE*Runner.SIZE ) 
+    	  {
+    		  buttons[row][column].setActionCommand(String.valueOf(b.bombsArray[row][column]));
+    		  b.BombsControl[row][column]=1;
+    		     		
+          }	
+    }
+/***************************************************************************************/ 
+    else   //  bomba olan  kutular için  flag  
+	{  
+    	if(buttons[row][column].getActionCommand().equals("B"+select.substring(1,4))) 
+		{ 
+		   buttons[row][column].setActionCommand("S"+select.substring(1,4));
+		   b.BombsControl[row][column]=0;
+		}
+	    else
+	    {
+	       buttons[row][column].setActionCommand("B"+select.substring(1,4));
+	       b.BombsControl[row][column]=1;
+	    }
+	  }
+      }
+	
+
+	
+
+   public  void nearBoxOpen(int row,int column) {
+	       String[] nearB= b.nearBox(row,column)	;
+ 
+		   int nearBSum=Integer.parseInt(nearB[9]);
+		   for(int ii=0;ii<nearBSum;ii++)
+		   { 
+			  int[] injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+			  int in=injn[0];
+			  int jn=injn[1];
+			  if(b.BombsControl[in][jn]==1) {continue;}
+			  b.BombsControl[in][jn]=1;
+			  if(b.bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) {}
+			  else if(b.bombsArray[in][jn]!=0) 
+			  {
+				  buttons[in][jn].setText(String.valueOf(b.bombsArray[in][jn]));
+				  buttons[in][jn].setEnabled(false);
+				  buttons[in][jn].getText();
+				  buttons[in][jn].setBackground(Color.LIGHT_GRAY);
+			  }
+			  else if(b.bombsArray[in][jn]==0)  	  
+			  {    
+				  buttons[in][jn].setText(" ");
+				  buttons[in][jn].setEnabled(false);
+				  buttons[in][jn].getText();
+				  buttons[in][jn].setBackground(Color.LIGHT_GRAY);
+				  nearBoxOpen(in,jn);
+			  }
+			}
+    }
+	
 	
 }

@@ -1,24 +1,24 @@
-package cihan.kurs.swing.minesweeper;
+package cihan.kurs.odev5.minesweeper;
+
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-
 public class Runner {
  
 	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
-	public static  int BOMBCOUNT= 9 ; //2*SIZE;
-
+	public static  int BOMBCOUNT=2*SIZE;
+	
+	
 	public static void main(String[] args) {
-		MinesWeeperSwing mws = new MinesWeeperSwing();	
-		mws.MinesWeeperSwingStart();
+	    MinesWeeper mw=new  MinesWeeper() ;
+		mw.playMW();
+	
 	}
-	
-	
-	/***************************************************** nb****************/		
+	   
+	/*********************************************************************/		
 	public static int[] findNumberfromIJ(int a) {
         //Statik array için Gelen sayıya 1. ve 2. idisini bulur /
 	  int[] ij =new int[2];	

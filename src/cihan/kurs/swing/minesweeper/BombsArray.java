@@ -12,8 +12,8 @@ import javax.swing.*;
 
 public class BombsArray { 
 	
-	private int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
-	private int[][] BombsControl= new int[Runner.SIZE][Runner.SIZE];
+	public int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
+	public int[][] BombsControl= new int[Runner.SIZE][Runner.SIZE];
 	
 	public int[][] getBombsArray() {
 		return bombsArray;
@@ -38,38 +38,6 @@ public class BombsArray {
 	}
 	
 	
-	public void setSightBombsArray(String select,int row,int column) {
-		NumberFormat formatter = new DecimalFormat("000");
-		boolean exit=true;
-        String selectFirst=select.substring(0,1).toUpperCase( );
-/***************************************************************************************/
-        if(bombsArray[row][column]!=Runner.BSIZE ) {//bomba olmayan kutular için set
-    	  if(bombsArray[row][column]==0 )  
-	      {   
-    		  nearBoxOpen(row,column);
-	      }
-    	  else if(bombsArray[row][column]!=Runner.SIZE*Runner.SIZE ) 
-    	  {
-    		  MinesWeeperSwing.buttons[row][column].setActionCommand(String.valueOf(bombsArray[row][column]));
-    		  BombsControl[row][column]=1;
-    		     		
-          }	
-    }
-/***************************************************************************************/ 
-    else   //  bomba olan  kutular için  flag  
-	{  
-    	if(MinesWeeperSwing.buttons[row][column].getActionCommand().equals("B"+select.substring(1,4))) 
-		{ 
-		   MinesWeeperSwing.buttons[row][column].setActionCommand("S"+select.substring(1,4));
-		   BombsControl[row][column]=0;
-		}
-	    else
-	    {
-	       MinesWeeperSwing.buttons[row][column].setActionCommand("B"+select.substring(1,4));
-		   BombsControl[row][column]=1;
-	    }
-	  }
-      }
 	
 	public void setBombsArray() {
 		 int[]   bombs =  new int[Runner.BOMBCOUNT];
@@ -140,10 +108,8 @@ public class BombsArray {
 		
 			return Runner.sort(bombArray);
 	}
-
-/*********************************************************************/		
-
-	public String[] nearBox(int i,int j){
+	
+public String[] nearBox(int i,int j){
 		
 		String[] n=new String[10];
 		int iFirst;
@@ -171,35 +137,8 @@ public class BombsArray {
 		return n;
 	}
 
-   public  void nearBoxOpen(int row,int column) {
-	       String[] nearB= nearBox(row,column)	;
- 
-		   int nearBSum=Integer.parseInt(nearB[9]);
-		   for(int ii=0;ii<nearBSum;ii++)
-		   { 
-			  int[] injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
-			  int in=injn[0];
-			  int jn=injn[1];
-			  if(BombsControl[in][jn]==1) {continue;}
-			  BombsControl[in][jn]=1;
-			  if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) {}
-			  else if(bombsArray[in][jn]!=0) 
-			  {
-				  MinesWeeperSwing.buttons[in][jn].setText(String.valueOf(bombsArray[in][jn]));
-				  MinesWeeperSwing.buttons[in][jn].setEnabled(false);
-				  MinesWeeperSwing.buttons[in][jn].getText();
-				  MinesWeeperSwing.buttons[in][jn].setBackground(Color.LIGHT_GRAY);
-			  }
-			  else if(bombsArray[in][jn]==0)  	  
-			  {    
-				  MinesWeeperSwing.buttons[in][jn].setText(" ");
-				  MinesWeeperSwing.buttons[in][jn].setEnabled(false);
-				  MinesWeeperSwing.buttons[in][jn].getText();
-				  MinesWeeperSwing.buttons[in][jn].setBackground(Color.LIGHT_GRAY);
-				  nearBoxOpen(in,jn);
-			  }
-			}
-    }
+/*********************************************************************/		
+
 
 }
 
