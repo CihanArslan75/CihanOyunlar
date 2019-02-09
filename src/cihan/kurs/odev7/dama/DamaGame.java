@@ -2,6 +2,8 @@ package cihan.kurs.odev7.dama;
 
 public class DamaGame extends Dama {
 	
+	private String[] hamleImperativeArray=new String[16]; 
+	
 	@Override
 	public void damaDraw() {
 		int a=0;
@@ -13,10 +15,11 @@ public class DamaGame extends Dama {
 			for(int j=0;j<8;j++) {
 				 if(damaArray[i][j]==1 )  System.out.print(" b ");
 				 else if(damaArray[i][j]==2 )  System.out.print(" s ");
+				 else if(damaArray[i][j]==11 )  System.out.print(" B ");
+				 else if(damaArray[i][j]==22 )  System.out.print(" S ");
 				 else System.out.print(" . ");
 			}
 			System.out.print("|");
-			System.out.print(a);
 			System.out.println();
 		}
 		System.out.println("  ------------------------");
@@ -26,22 +29,39 @@ public class DamaGame extends Dama {
 	@Override
 	public String[] hamlePlayableShow() {
 		String[] hamleFindArray=new String[20];
+		String[] hamleFindArrayImperative=new String[1];
 		int k=0;
+		int hamleImperative=0;
 	    for (int i = 0; i < damaArray.length; i++) {
 	    	for (int j = 0; j < damaArray.length; j++) {
 	    		if(damaArray[i][j]==Runner.player) {
-					hamleFindArray =hamleFind(i,j);
-					for (int jj = 0; jj < hamleFindArray.length; jj++) {
-						if(hamleFindArray[jj]!=null) 
-						{ 
-						  hamlePlayableArray[k]= findStonefromij(i,j);
-						  k++;
-						  break;
+	    			/*********** zorunlu hamle  hamleler ******************/
+	    			//System.out.println("i:"+i +" j:"+j);
+	    			hamleFindArrayImperative=hamleImperative(i,j);
+	    			if(hamleFindArrayImperative[0]!=null) {
+	    				hamleImperative++;
+	    				System.out.println(Runner.player +".Oyuncunun Zorunlu hamlesi var."+ hamleFindArrayImperative[0] +" Zorunlu Hamle Yapıldı.");
+	    			} 
+	    			/*********** zorunlu hamle  hamleler ******************/
+	    			else 
+	    			{
+	    				/*********** Zorunlu hamle yoksa Yapılabilecek hamleler ******************/
+		    			hamleFindArray =hamleFind(i,j);
+						for (int jj = 0; jj < hamleFindArray.length; jj++) {
+							if(hamleFindArray[jj]!=null) 
+							{ 
+							  hamlePlayableArray[k]= findStonefromij(i,j);
+							  k++;
+							  break;
+							}
 						}
-					}
+						
+	    			}
+	    			/*********** Zorunlu hamle yoksa Yapılabilecek hamleler ******************/
 				}
 			}
 	    }
+	    if(hamleImperative==0)  hamlePlayableDraw();
 		return hamlePlayableArray;
 	}
 	
@@ -53,6 +73,20 @@ public class DamaGame extends Dama {
 		}
 	}
 	
+	
+	@Override
+	public boolean hamleImperativeControl(int player) {
+		
+		if(player==Runner.player ) {
+		for (int i = 0; i < hamleImperativeArray.length; i++) {
+			if(hamleImperativeArray[i]!=null)
+			{ 
+				return true;
+			}
+		}
+		}
+		return false;
+	}
 	
 	@Override
 	public boolean hamleControl(String hamle) {
@@ -90,9 +124,10 @@ public class DamaGame extends Dama {
 					
 		if(sum==1) {
 			hamleDo(ktek,hamle);
+			System.out.println("Hamle Yapıldı !!!!!!");	
 		}else {
 			
-		}
+		} 
 		
 		return sum;
 	}
@@ -114,7 +149,7 @@ public class DamaGame extends Dama {
 	@Override
 	public String[] hamleFind(int i, int j ) {
 		String[] hamleFindArray=new String[10];
-	
+	  	
 		if(Runner.player==1) {
 			if(j==0 ) 
 			{  
@@ -135,12 +170,12 @@ public class DamaGame extends Dama {
 		}
 		else if( Runner.player==2)
 		{
-			if(j==0 ) 
+			if(j==0) 
 			{
 				if(damaArray[i-1][j]==0) hamleFindArray[0]=findStonefromij(i-1,j);
 				if(damaArray[i][j+1]==0) hamleFindArray[1]=findStonefromij(i,j+1);
 			}
-			else if(j==7 ) 
+			else if(j==7  ) 
 			{
 				if(damaArray[i-1][j]==0) hamleFindArray[0]=findStonefromij(i-1,j);
 				if(damaArray[i][j-1]==0) hamleFindArray[1]=findStonefromij(i,j-1);
@@ -163,6 +198,76 @@ public class DamaGame extends Dama {
 		
 		return hamleFindArray;
 	}
+	@Override
+	public String[] hamleImperative(int i, int j ) {
+	    int playerOther=playerOther();	  	
+	    hamleImperativeArray[0]=null;
+		if(Runner.player==1) {
+			if((j-2)>=0 ) { 
+				if( damaArray[i][j]==Runner.player && damaArray[i][j-1]==playerOther && damaArray[i][j-2]==0 ) {
+					damaArray[i][j]   = 0;
+					damaArray[i][j-1] = 0;
+					damaArray[i][j-2] = Runner.player;
+				    hamleImperativeArray[0]=findStonefromij(i,j);	
+				}
+			}
+			if((j+2)<8 ) { 
+				if( damaArray[i][j]==Runner.player && damaArray[i][j+1]==playerOther && damaArray[i][j+2]==0) {
+					damaArray[i][j]   = 0;
+					damaArray[i][j+1] = 0;
+					damaArray[i][j+2] = Runner.player;
+					hamleImperativeArray[0]=findStonefromij(i,j);	
+				}
+			}
+			if((i+2)<8 ) { 
+				if( damaArray[i][j]==Runner.player && damaArray[i+1][j]==playerOther && damaArray[i+2][j]==0) {
+					damaArray[i][j]   = 0;
+					damaArray[i+1][j] = 0;
+					if((i+2)==7) damaArray[i+2][j] = 11;  else damaArray[i+2][j] = 1; 
+					hamleImperativeArray[0]=findStonefromij(i,j);
+					
+				}
+			}
+		 }  
+		else if( Runner.player==2 )
+		{	if((j-2)>=0 ) { 
+				if( damaArray[i][j]==Runner.player &&  damaArray[i][j-1]==playerOther && damaArray[i][j-2]==0 && (j-1)>=0 && (j-2)>=0) {
+					damaArray[i][j]   = 0;
+				    damaArray[i][j-1] = 0;
+				    damaArray[i][j-2] = Runner.player;
+				    hamleImperativeArray[0]=findStonefromij(i,j);	
+				}
+			}
+			if((j+2)<8 ) { 
+			    if( damaArray[i][j]==Runner.player &&  damaArray[i][j+1]==playerOther && damaArray[i][j+2]==0) {
+			    	damaArray[i][j]   = 0;
+					damaArray[i][j+1] = 0;
+					damaArray[i][j+2] = Runner.player;
+					hamleImperativeArray[0]=findStonefromij(i,j);	
+				}
+			}
+			if((i+2)<8 ) { 
+				if( damaArray[i][j]==Runner.player &&  damaArray[i-1][j]==playerOther && damaArray[i-2][j]==0) {
+					damaArray[i][j]   = 0;
+					damaArray[i-1][j] = 0;
+					if((i+2)==7) damaArray[i-2][j] = 22;  else damaArray[i-2][j] = 2;
+					hamleImperativeArray[0]=findStonefromij(i,j);
+					}
+			}
+		}
+		else
+		{
+			try {
+				throw new Exception("Hatalı Oyuncu");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return hamleImperativeArray;
+		
+	}
+	
 
 	public String findStonefromij(int i, int j){
 		// Gelen i ve j ile taşı bulur
@@ -205,6 +310,13 @@ public class DamaGame extends Dama {
 		}
 	  }
 	  return ij;
+	}
+	
+	private int playerOther() {
+	int p = 0;
+		if(Runner.player==1) p=2;
+		else if(Runner.player==2) p=1;
+	return p;
 	}
 	
  }
