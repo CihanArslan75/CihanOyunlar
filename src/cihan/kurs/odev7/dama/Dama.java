@@ -24,5 +24,7 @@ public abstract class Dama {
 	public abstract void hamleDo(String hamleFirst,String hamleLast );
 	public abstract String[] hamleImperative(int i, int j );
 	public abstract boolean hamleImperativeControl(int player);
+	public abstract String hamleImpFind1();
+	public abstract String hamleImpFind2();
 
 }

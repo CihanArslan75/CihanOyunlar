@@ -27,26 +27,59 @@ public class DamaGame extends Dama {
 	}
 	
 	@Override
-	public String[] hamlePlayableShow() {
-		String[] hamleFindArray=new String[20];
+	public String hamleImpFind1() {
 		String[] hamleFindArrayImperative=new String[1];
-		int k=0;
-		int hamleImperative=0;
-	    for (int i = 0; i < damaArray.length; i++) {
-	    	for (int j = 0; j < damaArray.length; j++) {
+		hamleFindArrayImperative[0]=null;
+		String a=null;
+		for (int i = 0; i < 8;i++) {
+	    	for (int j = 0; j < 8;j++) {
 	    		if(damaArray[i][j]==Runner.player) {
 	    			/*********** zorunlu hamle  hamleler ******************/
-	    			//System.out.println("i:"+i +" j:"+j);
 	    			hamleFindArrayImperative=hamleImperative(i,j);
 	    			if(hamleFindArrayImperative[0]!=null) {
-	    				hamleImperative++;
 	    				System.out.println(Runner.player +".Oyuncunun Zorunlu hamlesi var."+ hamleFindArrayImperative[0] +" Zorunlu Hamle Yapıldı.");
+	    				damaDraw();
+	    				 a= hamleFindArrayImperative[0];
 	    			} 
+	    			
+				}
+			}
+	    }
+		return a;
+	}
+	
+	@Override
+	public String hamleImpFind2() {
+	   	String[] hamleFindArrayImperative=new String[1];
+		hamleFindArrayImperative[0]=null;
+		String a = null;
+		for (int i =7 ; i >= 0;i--) {
+	    	for (int j = 0; j < 8;j++) {
+	    		//System.out.println("i:"+i+"  j"+j);  
+	    		 if(damaArray[i][j]==Runner.player) {
 	    			/*********** zorunlu hamle  hamleler ******************/
-	    			else 
-	    			{
-	    				/*********** Zorunlu hamle yoksa Yapılabilecek hamleler ******************/
-		    			hamleFindArray =hamleFind(i,j);
+	    			hamleFindArrayImperative=hamleImperative(i,j);
+	    			if(hamleFindArrayImperative[0]!=null) {
+	    				System.out.println(Runner.player +".Oyuncunun Zorunlu hamlesi var."+ hamleFindArrayImperative[0] +" Zorunlu Hamle Yapıldı.");
+	    				 a= hamleFindArrayImperative[0];
+	    				damaDraw();
+	    			} 
+	    			
+				}
+			}
+	    }
+		
+		return a;
+	}
+	
+	@Override
+	public String[] hamlePlayableShow() {
+		String[] hamleFindArray=new String[20];
+		int k=0;
+		for (int i = 0; i < damaArray.length;i++) {
+	    	for (int j = 0; j < damaArray.length;j++) {
+	    		if(damaArray[i][j]==Runner.player) {
+	    			  hamleFindArray =hamleFind(i,j);
 						for (int jj = 0; jj < hamleFindArray.length; jj++) {
 							if(hamleFindArray[jj]!=null) 
 							{ 
@@ -56,12 +89,9 @@ public class DamaGame extends Dama {
 							}
 						}
 						
-	    			}
-	    			/*********** Zorunlu hamle yoksa Yapılabilecek hamleler ******************/
-				}
-			}
-	    }
-	    if(hamleImperative==0)  hamlePlayableDraw();
+	             }
+	      }
+		}
 		return hamlePlayableArray;
 	}
 	
@@ -250,8 +280,9 @@ public class DamaGame extends Dama {
 				if( damaArray[i][j]==Runner.player &&  damaArray[i-1][j]==playerOther && damaArray[i-2][j]==0) {
 					damaArray[i][j]   = 0;
 					damaArray[i-1][j] = 0;
-					if((i+2)==7) damaArray[i-2][j] = 22;  else damaArray[i-2][j] = 2;
+					if((i-2)==0) damaArray[i-2][j] = 22;  else damaArray[i-2][j] = 2;
 					hamleImperativeArray[0]=findStonefromij(i,j);
+					
 					}
 			}
 		}
@@ -318,5 +349,7 @@ public class DamaGame extends Dama {
 		else if(Runner.player==2) p=1;
 	return p;
 	}
+
+	
 	
  }

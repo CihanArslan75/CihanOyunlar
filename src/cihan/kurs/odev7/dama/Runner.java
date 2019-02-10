@@ -18,22 +18,29 @@ public class Runner {
 	Boolean damaImperativeControl;
 	String input;
 	String hamleArray[]= new String[10];
+	String hamleimpCon;
 	
 	do{
+		
 		int hamleCount=0;
-		dama.hamlePlayableShow();
-		//dama.hamlePlayableDraw();
-		damaImperativeControl =dama.hamleImperativeControl(player);
 		
-		if(damaImperativeControl) {
-//			dama.damaDraw();
-//	    	playerChange();
-	    	//dama.setHamleImperativeArray();
-	    	//ex=false;
-		}
-		
+		if(player==1) 
+		{
+			hamleimpCon=dama.hamleImpFind1();
+		} 
 		else 
 		{
+			hamleimpCon=dama.hamleImpFind2();
+			
+		}
+		
+		//damaImperativeControl =dama.hamleImperativeControl(player);
+		
+		if(hamleimpCon==null) {
+		
+		   dama.hamlePlayableShow();
+  	  	   dama.hamlePlayableDraw();
+		   
 		   input=sc.nextLine().toUpperCase();
 		   if(input.equals("X"))
 			{  
@@ -41,7 +48,8 @@ public class Runner {
 				ex=false;
 				break;
 			}
-		   damaControl=dama.hamleControl(input);
+		  
+		    damaControl=dama.hamleControl(input);
 			if(!damaControl)  
 			{
 				System.out.println("Yanlış Hamle Yaptınız ...!!!!   Tekrar Hamle Yapınız ...!!!");
@@ -49,8 +57,8 @@ public class Runner {
 			    hamleCount=dama.hamleShow(input);
 			   
 			    if( hamleCount==1) {
-//			    	dama.damaDraw();
-//			    	playerChange();
+			    	dama.damaDraw();
+			    	//playerChange();
 			    }
 			    else
 			    {
@@ -58,6 +66,8 @@ public class Runner {
 				    String input1=sc.nextLine().toUpperCase();
 				    damaControl=dama.hamleControl(input);
 				    dama.hamleDo(input1,input);
+				    dama.damaDraw();
+			    	//playerChange();
 				    
 			    }
 			}
@@ -72,15 +82,16 @@ public class Runner {
 				    dama.hamleDo(input2,input);
 				    
 				 }
-//				dama.damaDraw(); 
-//				playerChange();
+				dama.damaDraw(); 
+				//playerChange();
 				
 			}
 			
-		}	
-		dama.damaDraw();
-		playerChange();
+		}
+		//dama.damaDraw();
 		
+		playerChange();
+	   		
 	}while(ex);
 
 	}
