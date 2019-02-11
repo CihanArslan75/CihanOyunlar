@@ -152,9 +152,17 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 				}
 			}
 			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
+			 
 			 timer.stop();	
 		     JOptionPane.showMessageDialog(new JFrame(), "YANDINIZ", "Dialog",JOptionPane.ERROR_MESSAGE);
 		     timer=null;
+		      
+		     for (int j2 = 0; j2 < Runner.SIZE ; j2++) {
+		    	 for (int k2 = 0; k2 < Runner.SIZE; k2++) {
+					buttons[j2][k2].setEnabled(false);; 
+			}
+				
+			}
 		    //System.exit(0);
 	   	 }
 		 

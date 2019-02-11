@@ -5,41 +5,41 @@ import java.util.Scanner;
 @SuppressWarnings("resource")
 public class Runner {
 	
-	public static int player=1; //1  ve 2 nolu oyuncu
-
+	public static int oyuncu=1; //1  ve 2 nolu oyuncu
+	public static int uzunluk=8;
+	
 	public static void main(String[] args) {
-	DamaGame dama=new DamaGame();
+	
+	DamaZorunluHamle dama=new DamaZorunluHamle();
+	
 	System.out.println("Çıkış için x Giriniz !" );
-	dama.damaDraw();
-		
+	
+	dama.damaCiz();
+			
 	Scanner sc = new Scanner(System.in);
 	Boolean ex=true;
-	Boolean damaControl;
-	Boolean damaImperativeControl;
+	Boolean damaKontrol;
 	String input;
-	String hamleArray[]= new String[10];
-	String hamleimpCon;
+	String zorunluHamleKontrol;
 	
 	do{
 		
 		int hamleCount=0;
 		
-		if(player==1) 
-		{
-			hamleimpCon=dama.hamleImpFind1();
+		if(oyuncu==1) 
+		{ 	
+			zorunluHamleKontrol=dama.ZorunluhamleYap1();
 		} 
 		else 
-		{
-			hamleimpCon=dama.hamleImpFind2();
+		{ 
+			zorunluHamleKontrol=dama.ZorunluhamleYap2();
 			
 		}
 		
-		//damaImperativeControl =dama.hamleImperativeControl(player);
+		if(zorunluHamleKontrol==null) {
 		
-		if(hamleimpCon==null) {
-		
-		   dama.hamlePlayableShow();
-  	  	   dama.hamlePlayableDraw();
+		   dama.secilebilirhamleYap();
+  	  	   dama.SecilebilirHamleYaz();
 		   
 		   input=sc.nextLine().toUpperCase();
 		   if(input.equals("X"))
@@ -49,56 +49,63 @@ public class Runner {
 				break;
 			}
 		  
-		    damaControl=dama.hamleControl(input);
-			if(!damaControl)  
+		    damaKontrol=dama.hamleKontrol(input);
+			if(!damaKontrol)  
 			{
 				System.out.println("Yanlış Hamle Yaptınız ...!!!!   Tekrar Hamle Yapınız ...!!!");
 			    input=sc.nextLine().toUpperCase();
-			    hamleCount=dama.hamleShow(input);
+			    hamleCount=dama.hamleGoster(input);
 			   
 			    if( hamleCount==1) {
-			    	dama.damaDraw();
-			    	//playerChange();
+			    	dama.damaCiz();
+			    	//oyuncuDegistir();
 			    }
 			    else
 			    {
 			    	System.out.println("Hamle Yapınız ...!!!");
 				    String input1=sc.nextLine().toUpperCase();
-				    damaControl=dama.hamleControl(input);
-				    dama.hamleDo(input1,input);
-				    dama.damaDraw();
-			    	//playerChange();
+				    damaKontrol=dama.hamleKontrol(input);
+				    dama.hamleYap(input1,input);
+				    dama.damaCiz();
+			    	//oyuncuDegistir();
 				    
 			    }
 			}
 			else 
 			{  
-				 hamleCount=dama.hamleShow(input);
+				 hamleCount=dama.hamleGoster(input);
 				
 				 if( hamleCount>1) {
 				   	System.out.println("Hamle Yapınız ...!!!");
 				    String input2=sc.nextLine().toUpperCase();   
-				    damaControl=dama.hamleControl(input);
-				    dama.hamleDo(input2,input);
+				    damaKontrol=dama.hamleKontrol(input);
+				    dama.hamleYap(input2,input);
 				    
 				 }
-				dama.damaDraw(); 
-				//playerChange();
+				dama.damaCiz(); 
+				//oyuncuDegistir();
 				
 			}
 			
 		}
 		//dama.damaDraw();
 		
-		playerChange();
+		oyuncuDegistir();
 	   		
 	}while(ex);
 
 	}
 
-	private static void playerChange() {
-		if(player==1) player=2;
-		else if(player==2) player=1;
+	public static void oyuncuDegistir() {
+		if(oyuncu==1) oyuncu=2;
+		else if(oyuncu==2) oyuncu=1;
+	}
+	
+	public static int digerOyuncu() {
+		int p = 0;
+			if(oyuncu==1) p=2;
+			else if(oyuncu==2) p=1;
+		return p;
 	}
 
 }
