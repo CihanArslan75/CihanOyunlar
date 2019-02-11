@@ -159,7 +159,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		      
 		     for (int j2 = 0; j2 < Runner.SIZE ; j2++) {
 		    	 for (int k2 = 0; k2 < Runner.SIZE; k2++) {
-					buttons[j2][k2].setEnabled(false);; 
+					buttons[j2][k2].setEnabled(false); 
 			}
 				
 			}
