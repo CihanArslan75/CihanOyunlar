@@ -67,9 +67,10 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         btnStart.setForeground(Color.LIGHT_GRAY);
         btnStart.setBackground(Color.LIGHT_GRAY);
         btnStart.setBounds(0, 0, 10, 10);
-	    btnStart.setIcon(new ImageIcon(MinesWeeperSwing.class.getResource("/resources/emoji.jpg")));
-	    
-        sPanel.setSize(100,100);
+      //  btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("resources/emoji.jpg")));
+        btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("/emoji.jpg")));
+	                                                                 
+	    sPanel.setSize(100,100);
         
         sPanel.add(txt1);
         lbl1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -147,11 +148,13 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 			 for (int k = 0; k < Runner.SIZE; k++) {
 			    for (int l = 0; l < Runner.SIZE; l++) {
 					if(b.bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
-						buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
+						//buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
+						buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/bomb_w.png")));
 					}
 				}
 			}
-			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
+			 //buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
+			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/bomb_r.png")));
 			 
 			 timer.stop();	
 		     JOptionPane.showMessageDialog(new JFrame(), "YANDINIZ", "Dialog",JOptionPane.ERROR_MESSAGE);
@@ -222,7 +225,8 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         		int j=ijBomb[1];
         		
         		setSightBombsArray(btnNumber,i,j);
-        		buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/flag.png")));
+        		//buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/flag.png")));
+        		buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/flag.png")));
         		buttons[i][j].setActionCommand("S0" +i +j);
         	    txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount())); 
         		int bs=bombCount();

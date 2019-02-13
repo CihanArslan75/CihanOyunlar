@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-public class Runner {
+public class Runner  {
  
 	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
