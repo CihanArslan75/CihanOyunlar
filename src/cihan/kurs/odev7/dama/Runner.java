@@ -26,6 +26,7 @@ public class Runner {
 		
 		int hamleCount=0;
 		
+		
 		if(oyuncu==1) 
 		{ 	
 			zorunluHamleKontrol=dama.ZorunluhamleYap1();
@@ -89,7 +90,6 @@ public class Runner {
 			
 		}
 		//dama.damaDraw();
-		
 		oyuncuDegistir();
 	   		
 	}while(ex);

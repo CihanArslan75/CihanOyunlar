@@ -21,6 +21,10 @@ public class DamaSecilebilirHamle extends Dama{
 						}
 						
 	             }
+	    		else if(getDamaArray(i,j)==oyuncuDama()) {
+	    			secilebilirHamleArray[k]=findStonefromij(i,j);
+	    			k++;
+	    		}
 	      }
 		}
 		return secilebilirHamleArray;
@@ -54,27 +58,39 @@ public class DamaSecilebilirHamle extends Dama{
 		damaStone =findIJfromStone(hamle);
 		int i=damaStone[0];
 		int j=damaStone[1];
-	    int damaSHamle=getDamaArray(i,j);
-		int hamleType=0;
-		hamleShowArray=hamleBul(i,j);  // hamleType 0 ise normal 1 ise dama
-		int sum=0;
-		String ktek = null;
 		System.out.print("Yapılabilecek Hamleler :");
-		for (int k = 0; k < hamleShowArray.length; k++) {
-			if(hamleShowArray[k]!=null) {
-				System.out.print(hamleShowArray[k] +"  ");
-				ktek=hamleShowArray[k];
-				sum++;
+		int sum=0;
+		if(getDamaArray(i, j)==Runner.oyuncu) {
+			String ktek = null;
+			hamleShowArray=hamleBul(i,j);  // hamleType 0 ise normal 1 ise dama
+			for (int k = 0; k < hamleShowArray.length; k++) {
+				if(hamleShowArray[k]!=null) {
+					System.out.print(hamleShowArray[k] +"  ");
+					ktek=hamleShowArray[k];
+					sum++;
+				}
 			}
+			System.out.println();
+						
+			if(sum==1) {
+				hamleYap(ktek,hamle);
+				System.out.println("Hamle Yapıldı !!!!!!");	
+			}else {
+				
+			} 
 		}
-		System.out.println();
-					
-		if(sum==1) {
-			hamleYap(ktek,hamle);
-			System.out.println("Hamle Yapıldı !!!!!!");	
-		}else {
-			
-		} 
+		else if(getDamaArray(i, j)==oyuncuDama())
+		{
+			hamleShowArray=damaHamleBul(i,j);  // hamleType 0 ise normal 1 ise dama
+			for (int k = 0; k < hamleShowArray.length; k++) {
+				if(hamleShowArray[k]!=null) {
+					System.out.print(hamleShowArray[k] +"  ");
+					sum++;
+				}
+			}
+			System.out.println();
+						
+		}
 		
 		return sum;
 	}
@@ -89,15 +105,16 @@ public class DamaSecilebilirHamle extends Dama{
 		damaStoneLast= findIJfromStone(hamleLast);
 		int i=damaStoneLast[0];
 		int j=damaStoneLast[1];
+		setDamaArray(ii,jj, getDamaArray(i, j));
 		setDamaArray(i,j, 0) ;
-		setDamaArray(ii,jj, Runner.oyuncu);
+		
 	}
 	
 	
 	public String[] hamleBul(int i, int j ) {
 		String[] hamleFindArray=new String[10];
 	  	
-		if(Runner.oyuncu==1) {
+		if(Runner.oyuncu==1 && getDamaArray(i, j)==Runner.oyuncu) {
 			if(j==0 ) 
 			{  
 				if(getDamaArray(i,j+1)==0) hamleFindArray[0]=findStonefromij(i,j+1);
@@ -115,7 +132,7 @@ public class DamaSecilebilirHamle extends Dama{
 				if(getDamaArray(i+1,j)==0) hamleFindArray[2]=findStonefromij(i+1,j);
 			}
 		}
-		else if( Runner.oyuncu==2)
+		else if( Runner.oyuncu==2 && getDamaArray(i, j)==Runner.oyuncu)
 		{
 			if(j==0) 
 			{
@@ -134,6 +151,10 @@ public class DamaSecilebilirHamle extends Dama{
 				if(getDamaArray(i-1,j)==0) hamleFindArray[2]=findStonefromij(i-1,j);
 			}
 		}
+		else if(getDamaArray(i, j)== 11 || getDamaArray(i, j)==22)
+		{
+			
+		}
 		else
 		{
 			try {
@@ -146,9 +167,67 @@ public class DamaSecilebilirHamle extends Dama{
 		return hamleFindArray;
 	}
 	
+	public String[] damaHamleBul(int i,int j) {
+		String[] damaHamleFindArray=new String[20];
+		int k=0;
+	  	if(getDamaArray(i, j)==11 || getDamaArray(i, j)==22)  {
+	  		
+	  		for (int ii = i; ii >=0; ii--) {
+				if((ii-1)<0) {
+					break;
+				}
+				else
+				{
+					if(getDamaArray(ii-1, j)==0) damaHamleFindArray[k]=findStonefromij(ii-1,j);
+					k++;
+				}
+			
+			}
+	  		for (int ii = i; ii < Runner.uzunluk; ii++) {
+				if((ii+1)>Runner.uzunluk-1) {
+					break;
+				}
+				else
+				{  
+					if(getDamaArray(ii+1, j)==0) damaHamleFindArray[k]=findStonefromij(ii+1,j);
+					k++;
+				}
+	  			
+		    }
+	  		for (int jj = j; jj >=0; jj--) {
+	  			if((jj-1)<0) {
+					break;
+				}
+				else
+				{
+					if(getDamaArray(i, jj-1)==0) damaHamleFindArray[k]=findStonefromij(i,jj-1);
+					k++;
+				}
+		    }
+	  		for (int jj = j; jj < Runner.uzunluk; jj++) {
+	  			if((jj+1)>Runner.uzunluk-1) {
+					break;
+				}
+				else
+				{
+					if(getDamaArray(i, jj+1)==0) damaHamleFindArray[k]=findStonefromij(i,jj+1);
+					k++;
+				}
+		    }
+	  		
+		
+		}
+//	  	System.out.println("dama");
+//		for (int k2 = 0; k2 < damaHamleFindArray.length; k2++) {
+//			System.out.print(damaHamleFindArray[k2]+" ");
+//		}
+//	  	System.out.println("");
+		return damaHamleFindArray;
+	}
 	
-
-	
-	
+	public int oyuncuDama() {
+		if(Runner.oyuncu==1) return 11;
+		else  return 22;
+	}
 		
  }
