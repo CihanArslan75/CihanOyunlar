@@ -38,8 +38,8 @@ public class HfzOyna extends JFrame {
 	private JLabel lblKullaniciAdi;
 	private JLabel lblLevel;
 	private int butonBoyut=70;
-	private int bPanelBoyut=600;
-	private int cBoyut=800;
+	private int bPanelBoyut=800;
+	private int cBoyut=900;
 	private boolean levelBittiKontrol=false;
 	private int can=0;
 	private JLabel lblCan = new JLabel("");
@@ -73,8 +73,8 @@ public class HfzOyna extends JFrame {
 	public void bPanelInitialize() {
 		 bPanel.setForeground(Color.LIGHT_GRAY);
 		 c.add(bPanel); 
-		 int bPanelbas=(cBoyut-bPanelBoyut)/2;
-		 bPanel.setBounds(45,100,706,564);
+		 int bPanelbas=(cBoyut-bPanelBoyut)/2-100;
+		 bPanel.setBounds(45,100,bPanelBoyut,bPanelBoyut);
 		 bPanel.setLayout(null);
 		 
 		 JTextArea txtFileBilgi = new JTextArea();
@@ -87,7 +87,7 @@ public class HfzOyna extends JFrame {
 	public void uPanelInitialize() {
 		 JPanel uPanel = new JPanel();
 		 uPanel.setBackground(Color.GRAY);
-		 uPanel.setBounds(35, 13, 716, 74);
+		 uPanel.setBounds(45, 13, bPanelBoyut, 74);
 		 c.add(uPanel);
 		 uPanel.setLayout(null);
 		 uPanel.setVisible(true);
@@ -113,14 +113,14 @@ public class HfzOyna extends JFrame {
 		 lblLevel.setText(String.valueOf(level));
 		 
 		 JLabel lblKalp = new JLabel("New label");
-		 lblKalp.setBounds(404, 18, 67, 44);
+		 lblKalp.setBounds(502, 13, 67, 44);
 		 uPanel.add(lblKalp);
 		 lblKalp.setIcon((Icon) new ImageIcon(getClass().getResource( "/kalp.png")));
 		 
 		 lblCan = new JLabel("");
 		 lblCan.setHorizontalAlignment(SwingConstants.CENTER);
 		 lblCan.setFont(new Font("Arial", Font.BOLD, 20));
-		 lblCan.setBounds(483, 22, 56, 39);
+		 lblCan.setBounds(581, 17, 56, 39);
 		 uPanel.add(lblCan);
 		 can=(10*level)+10;
 		 lblCan.setText(String.valueOf(can));
@@ -134,7 +134,7 @@ public class HfzOyna extends JFrame {
     	String[] hfzArrayOpen = new String[2];	
 		int ii=0;
 		int iii=0;
-		int butonBasX=(bPanelBoyut- ((Runner.satirSayisi/2)*butonBoyut))/2 -100;
+		int butonBasX=(bPanelBoyut- ((Runner.satirSayisi/2)*butonBoyut))/2 -100 ;
 		
 		for (int i = 0; i < Runner.satirSayisi; i++) {
 			buttons[i] = new JButton("");
@@ -309,7 +309,7 @@ public class HfzOyna extends JFrame {
 					  yeniBilgi=yeniBilgi+bilgi1[0]+";"+bilgi1[1]+";"+bilgi1[2]+"\n";	
 				  }
 			}
-			  txtFileBilgi.setText(yeniBilgi);	
+			txtFileBilgi.setText(yeniBilgi);	
 			FileWriter w= new FileWriter(file);
 			w.append(txtFileBilgi.getText());
 			w.close();
