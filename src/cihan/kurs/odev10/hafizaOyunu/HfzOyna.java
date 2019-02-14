@@ -232,7 +232,6 @@ public class HfzOyna extends JFrame {
 	public void getFoto(int[] hfzArray) {
 		List<Integer> r1Array = new ArrayList<Integer>();
 		List<Integer> r2Array = new ArrayList<Integer>();
-		System.out.println("Runner.satirSayisi:"+Runner.satirSayisi);
 		for (int i = 1; i <= Runner.satirSayisi/2; i++) 
 		{
 			int r1;
@@ -257,10 +256,10 @@ public class HfzOyna extends JFrame {
 			hfzArray[r2]=r1;
 		}
 		
-		for (int i = 0; i < 8; i++) {
-			System.out.print(hfzArray[i]+" ");
-		}
-		System.out.println();
+//		for (int i = 0; i < 8; i++) {
+//			System.out.print(hfzArray[i]+" ");
+//		}
+//		System.out.println();
 	}
 	
 	public boolean levelAtla(JButton[] buttons) {
