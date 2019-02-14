@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.TextArea;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JTextArea;
 
 public class HfzGiris extends JFrame{
 	private JTextField txtKullaniciAdi;
@@ -80,7 +82,7 @@ public class HfzGiris extends JFrame{
 		btnIptal.setBounds(211, 158, 97, 25);
 		
 		c.add(btnIptal);
-				
+						
 	}
 	
 	public int  kullaniciKontrol() {
@@ -109,7 +111,7 @@ public class HfzGiris extends JFrame{
 				  }			 
 			}
 			if(level==999 && sifreHatali==false) JOptionPane.showMessageDialog(HfzGiris.this, "Kullanıcı Yok");
-			
+			br.close();
 		} catch ( IOException e) {
 			e.printStackTrace();
 		}

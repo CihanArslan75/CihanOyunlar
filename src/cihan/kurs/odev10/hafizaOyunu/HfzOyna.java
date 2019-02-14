@@ -4,6 +4,12 @@ import java.awt.Container;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -19,14 +25,15 @@ import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class HfzOyna extends JFrame {
 	private Container c =getContentPane();
 	private JPanel bPanel=new JPanel();
-//	private JButton[] buttons = new JButton[Runner.satirSayisi];
+	private JPanel uPanel = new JPanel();
+	JTextArea txtFileBilgi = new JTextArea();
 	private int level ;
 	private String kullaniciAdi ;
-	private String[] hfzArrayOpen = new String[2];	
 	int iiold = 999;
 	private JLabel lblKullaniciAdi;
 	private JLabel lblLevel;
@@ -34,10 +41,13 @@ public class HfzOyna extends JFrame {
 	private int bPanelBoyut=600;
 	private int cBoyut=800;
 	private boolean levelBittiKontrol=false;
+	private int can=0;
+	private JLabel lblCan = new JLabel("");
 	
 	public HfzOyna(String kullaniciAdi,int  level ) {
 		this.kullaniciAdi =kullaniciAdi;
 		this.level=level;
+		ilkOyunBaslat();
 		hfzInitialize();
 	}
 	
@@ -45,6 +55,7 @@ public class HfzOyna extends JFrame {
 		 cInitialize();
 		 buttonsInitialize();
 		 bPanelInitialize();
+		 uPanelInitialize() ;
 				 
 		 
 	}
@@ -56,38 +67,71 @@ public class HfzOyna extends JFrame {
 		 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		 c.setVisible(true);
 		 c.setBackground(Color.LIGHT_GRAY);
-		 
-		 lblKullaniciAdi = new JLabel();
-		 lblKullaniciAdi.setForeground(Color.RED);
-		 lblKullaniciAdi.setFont(new Font("Arial", Font.BOLD, 20));
-		 lblKullaniciAdi.setBounds(80, 24, 137, 43);
-		 getContentPane().add(lblKullaniciAdi);
-		 lblKullaniciAdi.setText(kullaniciAdi);
-		 
-		 lblLevel = new JLabel();
-		 lblLevel.setForeground(Color.RED);
-		 lblLevel.setFont(new Font("Arial", Font.BOLD, 20));
-		 lblLevel.setBounds(254, 24, 116, 43);
-		 getContentPane().add(lblLevel);
-		 lblLevel.setText(String.valueOf(level));
-		 
-		 
-		 
+		 			 
 	}
 	
 	public void bPanelInitialize() {
 		 bPanel.setForeground(Color.LIGHT_GRAY);
 		 c.add(bPanel); 
 		 int bPanelbas=(cBoyut-bPanelBoyut)/2;
-		 bPanel.setBounds(bPanelbas,bPanelbas,bPanelBoyut,bPanelBoyut);
+		 bPanel.setBounds(45,100,706,564);
 		 bPanel.setLayout(null);
+		 
+		 JTextArea txtFileBilgi = new JTextArea();
+		 txtFileBilgi.setBounds(415, 13, 86, 4);
+		 //bPanel.add(txtFileBilgi);
+		 //txtFileBilgi.setVisible(true);
 		 bPanel.setVisible(true);
+	}
+	
+	public void uPanelInitialize() {
+		 JPanel uPanel = new JPanel();
+		 uPanel.setBackground(Color.GRAY);
+		 uPanel.setBounds(35, 13, 716, 74);
+		 c.add(uPanel);
+		 uPanel.setLayout(null);
+		 uPanel.setVisible(true);
+		 
+		 JLabel label = new JLabel("");
+		 label.setBounds(231, 22, 0, 0);
+		 uPanel.add(label);
+		 
+		 lblKullaniciAdi = new JLabel();
+		 lblKullaniciAdi.setBounds(12, 22, 132, 24);
+		 lblKullaniciAdi.setVerticalAlignment(SwingConstants.TOP);
+		 uPanel.add(lblKullaniciAdi);
+		 lblKullaniciAdi.setForeground(Color.BLACK);
+		 lblKullaniciAdi.setFont(new Font("Arial", Font.BOLD, 20));
+		 lblKullaniciAdi.setText(kullaniciAdi);
+		 
+		 lblLevel = new JLabel();
+		 lblLevel.setHorizontalAlignment(SwingConstants.CENTER);
+		 lblLevel.setBounds(231, 22, 35, 35);
+		 uPanel.add(lblLevel);
+		 lblLevel.setForeground(Color.BLACK);
+		 lblLevel.setFont(new Font("Arial", Font.PLAIN, 30));
+		 lblLevel.setText(String.valueOf(level));
+		 
+		 JLabel lblKalp = new JLabel("New label");
+		 lblKalp.setBounds(404, 18, 67, 44);
+		 uPanel.add(lblKalp);
+		 lblKalp.setIcon((Icon) new ImageIcon(getClass().getResource( "/kalp.png")));
+		 
+		 lblCan = new JLabel("");
+		 lblCan.setHorizontalAlignment(SwingConstants.CENTER);
+		 lblCan.setFont(new Font("Arial", Font.BOLD, 20));
+		 lblCan.setBounds(483, 22, 56, 39);
+		 uPanel.add(lblCan);
+		 can=(10*level)+10;
+		 lblCan.setText(String.valueOf(can));
+		 
 		 		
 	}
 	
     public void buttonsInitialize() {
     	JButton[] buttons = new JButton[Runner.satirSayisi];
     	int[] hfzArray = new int[Runner.satirSayisi];
+    	String[] hfzArrayOpen = new String[2];	
 		int ii=0;
 		int iii=0;
 		int butonBasX=(bPanelBoyut- ((Runner.satirSayisi/2)*butonBoyut))/2 -100;
@@ -116,49 +160,60 @@ public class HfzOyna extends JFrame {
 							
 					@Override
 					public void run() {
-					 		
-						int ii=Integer.parseInt(e.getActionCommand());
-						buttons[ii].setIcon((Icon) new ImageIcon(getClass().getResource( "/"+hfzArray[ii]+".png")));
-						
-						levelBittiKontrol= levelAtla(buttons);
-						if(!levelBittiKontrol) {		
-						
-							try {
-								Thread.sleep(1000);
-							} catch (InterruptedException e1) {
-								e1.printStackTrace();
-							}	
+					 	
+						can--;	
+						lblCan.setText(String.valueOf(can));
+					 	
+					 	if(can<0) {
+					 		lblCan.setText("0");
+					 		JOptionPane.showMessageDialog(HfzOyna.this,"Canlarınız Bitti. Bu seviyeyi tekrar Oynayınız  !!");
+					 		yeniOyunBaslat(0);
+					 	}
+					 	else
+					 	{	
+					 		int ii=Integer.parseInt(e.getActionCommand());
+							buttons[ii].setIcon((Icon) new ImageIcon(getClass().getResource( "/"+hfzArray[ii]+".png")));
 							
-							if(hfzArrayOpen[0]==null ) {
-								hfzArrayOpen[0]=String.valueOf(hfzArray[ii]);
-							}
-							else  {
-								hfzArrayOpen[1]=String.valueOf(hfzArray[ii]);
-							}
-											
-							if(hfzArrayOpen[0]!=null && hfzArrayOpen[1]!=null && !hfzArrayOpen[0].equals(hfzArrayOpen[1])) 
-							{
-							    buttons[ii].setIcon(null);
-								buttons[iiold].setIcon(null);
-							}
+							levelBittiKontrol= levelAtla(buttons);
+							if(!levelBittiKontrol) {		
 							
-							if(hfzArrayOpen[0]!=null && hfzArrayOpen[1]!=null) {
-								hfzArrayOpen[0]=null;
-								hfzArrayOpen[1]=null;
-							}
-	
-							iiold=ii;
-					 }
-				else
-				{
-					JOptionPane.showMessageDialog(HfzOyna.this,"Level Atladınız");
-					bPanel.removeAll();
-					level++;
-					Runner.satirSayisi=Runner.satirSayisi+2;
-					System.out.println(Runner.satirSayisi);
-					lblLevel.setText(String.valueOf(level));
-					hfzInitialize();
-				}
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e1) {
+									e1.printStackTrace();
+								}	
+								
+								if(hfzArrayOpen[0]==null ) {
+									hfzArrayOpen[0]=String.valueOf(hfzArray[ii]);
+								}
+								else  {
+									hfzArrayOpen[1]=String.valueOf(hfzArray[ii]);
+								}
+												
+								if(hfzArrayOpen[0]!=null && hfzArrayOpen[1]!=null && !hfzArrayOpen[0].equals(hfzArrayOpen[1])) 
+								{
+								    buttons[ii].setIcon(null);
+									buttons[iiold].setIcon(null);
+								}
+								if(hfzArrayOpen[0]!=null && hfzArrayOpen[1]!=null && hfzArrayOpen[0].equals(hfzArrayOpen[1])) 
+								{
+									buttons[ii].setEnabled(false);
+									buttons[iiold].setEnabled(false);
+								}
+								if(hfzArrayOpen[0]!=null && hfzArrayOpen[1]!=null) {
+									hfzArrayOpen[0]=null;
+									hfzArrayOpen[1]=null;
+								}
+		
+								iiold=ii;
+						 }
+					else
+					{
+						JOptionPane.showMessageDialog(HfzOyna.this,"Level Atladınız");
+						yeniOyunBaslat(1);
+						levelGuncelle();				
+					}
+				 }		
 				} 
 				
 				});
@@ -216,4 +271,51 @@ public class HfzOyna extends JFrame {
 		}
 		return true;
 	}
+	
+	public void ilkOyunBaslat() {
+		if(level==1) Runner.satirSayisi=8;
+		else 
+		for (int i = 1; i < level; i++) {
+			Runner.satirSayisi=Runner.satirSayisi+2;
+		}
+				
+	}
+	
+	public void yeniOyunBaslat(int a) {
+		bPanel.removeAll();
+		uPanel.removeAll();
+		if(a==1) {
+			level++;
+			Runner.satirSayisi=Runner.satirSayisi+2;
+			lblKullaniciAdi.setText(kullaniciAdi);
+			lblLevel.setText(String.valueOf(level));
+		}
+		hfzInitialize();
+	}
+	
+	public void levelGuncelle() {
+	    File file = new File(String.valueOf(Runner.path+"//HafizaKullaniciBilgi.txt"));
+		try {
+			BufferedReader br= new BufferedReader(new FileReader(file));
+			String bilgi;
+			String[] bilgi1;
+			 String yeniBilgi = "";
+			  while((bilgi=br.readLine())!=null) {
+				  bilgi1=bilgi.split(";");
+				  if(bilgi1[0].equals(lblKullaniciAdi.getText())) {
+					 yeniBilgi=yeniBilgi+bilgi1[0]+";"+bilgi1[1]+";"+level+"\n";				 
+				  }	else
+				  {
+					  yeniBilgi=yeniBilgi+bilgi1[0]+";"+bilgi1[1]+";"+bilgi1[2]+"\n";	
+				  }
+			}
+			  txtFileBilgi.setText(yeniBilgi);	
+			FileWriter w= new FileWriter(file);
+			w.append(txtFileBilgi.getText());
+			w.close();
+			br.close();
+		} catch ( IOException e) {
+			e.printStackTrace();
+		}
+}
 }

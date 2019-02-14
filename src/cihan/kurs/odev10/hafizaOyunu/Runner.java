@@ -7,10 +7,10 @@ public class Runner {
 	public static String path="C:\\Users\\Cihan\\Desktop\\Cihan\\HazifaOyunu";
 	
 	public static void main(String[] args) {
-		//HfzGiris hfzGiris = new HfzGiris();
-		//hfzGiris.setVisible(true);
-		HfzOyna h =new HfzOyna("cihan",1);
-		h.setVisible(true);
+		HfzGiris hfzGiris = new HfzGiris();
+		hfzGiris.setVisible(true);
+		//HfzOyna h =new HfzOyna("cihan",1);
+		//h.setVisible(true);
 	}
 	
 	
