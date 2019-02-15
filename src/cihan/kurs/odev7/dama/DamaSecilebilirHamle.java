@@ -186,15 +186,18 @@ public class DamaSecilebilirHamle extends Dama{
 					break;
 				}
 				else
-				{   if(getDamaArray(ii-1, j)==0) {
-						damaHamleFindArray.add(findStonefromij(ii-1,j)) ;
+				{   if(getDamaArray(ii-1, j)==Runner.oyuncu || getDamaArray(ii-1, j)==oyuncuDama() )
+					break;
+					if(getDamaArray(ii-1, j)==0) {
+					    damaHamleFindArray.add(findStonefromij(ii-1,j)) ;
 						
 				    }
 				}
 				if((ii-2)<0) {
 					break;
 				}
-				else if(getDamaArray(ii-1, j)==0 && getDamaArray(ii-2, j)!=0) 
+				else 
+				if(getDamaArray(ii-1, j)==0 && getDamaArray(ii-2, j)!=0) 
 				{
 					damaHamleFindArray.add( findStonefromij(ii-1,j)) ;
 				
@@ -208,8 +211,10 @@ public class DamaSecilebilirHamle extends Dama{
 					break;
 				}
 				else
-				{  
+				{    if(getDamaArray(ii+1, j)==Runner.oyuncu || getDamaArray(ii+1, j)==oyuncuDama() )
+					break;
 				if(getDamaArray(ii+1, j)==0 ) {
+					
 					damaHamleFindArray.add(findStonefromij(ii+1,j)) ;
 				 
 				}
@@ -231,7 +236,9 @@ public class DamaSecilebilirHamle extends Dama{
 					break;
 				}
 				else
-				{   if(getDamaArray(i, jj-1)==0)
+				{   if(getDamaArray(i, jj-1)==Runner.oyuncu || getDamaArray(i, jj-1)==oyuncuDama() )
+					break;
+					if(getDamaArray(i, jj-1)==0)
 			    	{
 					damaHamleFindArray.add( findStonefromij(i,jj-1)) ;
 				}
@@ -251,7 +258,9 @@ public class DamaSecilebilirHamle extends Dama{
 					break;
 				}
 				else
-				{   if(getDamaArray(i, jj+1)==0 ) 
+				{   if(getDamaArray(i, jj+1)==Runner.oyuncu || getDamaArray(i, jj+1)==oyuncuDama() )
+					break;
+					if(getDamaArray(i, jj+1)==0 ) 
 			    	{damaHamleFindArray.add( findStonefromij(i,jj+1)) ;
 					}
 				}
@@ -300,10 +309,9 @@ public class DamaSecilebilirHamle extends Dama{
 				}
 				else
 				{
-					if(getDamaArray(ii, jL)==oyuncuDama() || getDamaArray(ii, jL)==digerOyuncu())  {
-						
-						setDamaArray(ii, jF, 0);
-						setDamaArray(iL, jL, oyuncuDama());
+					if(getDamaArray(ii, jL)==oyuncuDama() || getDamaArray(ii, jL)==digerOyuncu() || getDamaArray(ii, jL)==digerOyuncuDama())  {
+					   setDamaArray(ii, jF, 0);
+					   setDamaArray(iL, jL, oyuncuDama());
 					}
 				}
 			
