@@ -50,8 +50,8 @@ public class Dama {
 		else if(j==1) stone="B"+(i+1);
 		else if(j==2) stone="C"+(i+1);
 		else if(j==3) stone="D"+(i+1);
-		else if(j==4) stone="F"+(i+1);
-		else if(j==5) stone="E"+(i+1);
+		else if(j==4) stone="E"+(i+1);
+		else if(j==5) stone="F"+(i+1);
 		else if(j==6) stone="G"+(i+1);
 		else if(j==7) stone="H"+(i+1);
 		else

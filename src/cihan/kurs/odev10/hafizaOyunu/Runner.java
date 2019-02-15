@@ -22,7 +22,7 @@ public class Runner {
 		int x= (rand.nextInt((max - min) + 1) +min);
 		
 		while(x<min || x>max)  {
-			x =rand.nextInt(((max - min) + 1)+min);
+			x =(rand.nextInt((max - min) + 1)+min);
 		}
 		
 		return x;
@@ -36,7 +36,7 @@ public class Runner {
 		int x= rand.nextInt(((max - min) + 1)+min);
 		
 		while(x<min || x>max)  {
-			x =rand.nextInt(((max - min) + 1)+min);
+			x =(rand.nextInt((max - min) + 1)+min);
 		}
 		
 		return x;

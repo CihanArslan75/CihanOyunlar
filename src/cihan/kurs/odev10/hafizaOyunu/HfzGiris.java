@@ -41,12 +41,12 @@ public class HfzGiris extends JFrame{
 		c.setVisible(true);
 		
 		txtKullaniciAdi = new JTextField();
-		txtKullaniciAdi.setBounds(157, 39, 130, 22);
+		txtKullaniciAdi.setBounds(145, 42, 130, 22);
 		c.add(txtKullaniciAdi);
 		txtKullaniciAdi.setColumns(10);
 		
 		txtSifre = new JTextField();
-		txtSifre.setBounds(157, 97, 130, 22);
+		txtSifre.setBounds(145, 100, 130, 22);
 		c.add(txtSifre);
 		txtSifre.setColumns(10);
 		
@@ -70,7 +70,7 @@ public class HfzGiris extends JFrame{
 				
 			}
 		});
-		btnGiris.setBounds(62, 158, 97, 25);
+		btnGiris.setBounds(46, 158, 97, 25);
 		c.add(btnGiris);
 		
 		JButton btnIptal = new JButton("İptal");
@@ -79,7 +79,7 @@ public class HfzGiris extends JFrame{
 				System.exit(0);
 			}
 		});
-		btnIptal.setBounds(211, 158, 97, 25);
+		btnIptal.setBounds(195, 158, 97, 25);
 		
 		c.add(btnIptal);
 						

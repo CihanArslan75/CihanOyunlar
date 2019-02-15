@@ -282,7 +282,7 @@ public class HfzOyna extends JFrame {
 	
 	public void yeniOyunBaslat(int a) {
 		bPanel.removeAll();
-		uPanel.removeAll();
+		//uPanel.removeAll();
 		if(a==1) {
 			level++;
 			Runner.satirSayisi=Runner.satirSayisi+2;

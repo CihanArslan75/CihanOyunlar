@@ -23,24 +23,20 @@ public class Runner {
 	String zorunluHamleKontrol;
 	
 	do{
-		
 		int hamleCount=0;
-		
-		
 		if(oyuncu==1) 
 		{ 	
-			zorunluHamleKontrol=dama.ZorunluhamleYap1();
+			zorunluHamleKontrol=dama.zorunluHamleYap1();
 		} 
 		else 
 		{ 
-			zorunluHamleKontrol=dama.ZorunluhamleYap2();
-			
+			zorunluHamleKontrol=dama.zorunluHamleYap2();	
 		}
 		
 		if(zorunluHamleKontrol==null) {
 		
-		   dama.secilebilirhamleYap();
-  	  	   dama.SecilebilirHamleYaz();
+		   dama.secilebilirHamleYap();
+  	  	   dama.secilebilirHamleYaz();
 		   
 		   input=sc.nextLine().toUpperCase();
 		   if(input.equals("X"))
@@ -59,7 +55,6 @@ public class Runner {
 			   
 			    if( hamleCount==1) {
 			    	dama.damaCiz();
-			    	//oyuncuDegistir();
 			    }
 			    else
 			    {
@@ -68,8 +63,6 @@ public class Runner {
 				    damaKontrol=dama.hamleKontrol(input);
 				    dama.hamleYap(input1,input);
 				    dama.damaCiz();
-			    	//oyuncuDegistir();
-				    
 			    }
 			}
 			else 
@@ -84,12 +77,9 @@ public class Runner {
 				    
 				 }
 				dama.damaCiz(); 
-				//oyuncuDegistir();
-				
 			}
 			
 		}
-		//dama.damaDraw();
 		oyuncuDegistir();
 	   		
 	}while(ex);
@@ -101,11 +91,6 @@ public class Runner {
 		else if(oyuncu==2) oyuncu=1;
 	}
 	
-	public static int digerOyuncu() {
-		int p = 0;
-			if(oyuncu==1) p=2;
-			else if(oyuncu==2) p=1;
-		return p;
-	}
+	
 
 }
