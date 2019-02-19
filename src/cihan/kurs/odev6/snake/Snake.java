@@ -55,7 +55,7 @@ public class Snake {
 			
 		
     return snakeArray;
-	}
+	 }
 	
 	
 	

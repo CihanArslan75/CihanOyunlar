@@ -282,6 +282,7 @@ public class HfzOyna extends JFrame {
 	
 	public void yeniOyunBaslat(int a) {
 		bPanel.removeAll();
+		bPanel.updateUI();
 		//uPanel.removeAll();
 		if(a==1) {
 			level++;

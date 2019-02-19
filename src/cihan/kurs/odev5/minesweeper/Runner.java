@@ -25,14 +25,14 @@ public class Runner {
 	  ij[0]=a/SIZE;
 	  ij[1]=a%SIZE;
 	  return ij;
-	}
+	 }
 	
 	public static String findIJfromNumber(int i,int j) {
         // Gelen i ve j den Snumarasını bulur /
 		  NumberFormat formatter = new DecimalFormat("000");
 	      String number ="S" + formatter.format( Integer.parseInt((String.valueOf(i) + String.valueOf(j))));	
 	   return number;
-	}
+	 }
 	
 	public static int[] sort(int[] bomb ) {
 		int temp;
