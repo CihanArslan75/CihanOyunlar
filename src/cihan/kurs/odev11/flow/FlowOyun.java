@@ -16,16 +16,16 @@ public class FlowOyun extends JFrame{
 	}
 
 	private void Initialize() {
-		FlowOyunButon f=new FlowOyunButon();
+		FlowOyunButon b=new FlowOyunButon();
 		
 		setBounds(100, 100, 730, 730);
 		getContentPane().setLayout(null);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		c.add(f.getbbPanel());
-		f.getbbPanel().setLayout(null);
-		f.getbbPanel().setVisible(true);
-		c.add(f.getbbPanel());
+		c.add(b.getbbPanel());
+		b.getbbPanel().setLayout(null);
+		b.getbbPanel().setVisible(true);
+		c.add(b.getbbPanel());
 	}
 }

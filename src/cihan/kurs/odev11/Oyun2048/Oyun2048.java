@@ -5,24 +5,31 @@ import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+import java.awt.Container;
 
 public class Oyun2048 extends JFrame{
+	
+	private Container c= getContentPane();
+	
 	public Oyun2048() {
-		setBounds(100,100,300,300);
-		setVisible(true);
-		getContentPane().setLayout(null);
-		
-		JButton button1 = new JButton("New button");
-		button1.setBackground(Color.red);
-		button1.setBounds(95, 104, 97, 83);
-		getContentPane().add(button1);
-		button1.setVisible(true);
-		button1.addKeyListener(new KeyAdapter() {
-		@Override
-			public void keyPressed(KeyEvent e) {
-				System.out.println("aaa:"+e.getKeyCode());
-			}
-		});
-		
+		getContentPane().setBackground(Color.PINK);
+		Initialize();
 	}
+
+	private void Initialize() {
+		Oyun2048Button  b = new Oyun2048Button();
+		setTitle("2048");
+		setBounds(600, 200, 600, 600);
+		c.setLayout(null);
+		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		c.add(b.getBbPanel());
+		b.getBbPanel().setLayout(null);
+		b.getBbPanel().setVisible(true);
+		c.add(b.getBbPanel());
+			
+	}
+	
+	
+	
 }
