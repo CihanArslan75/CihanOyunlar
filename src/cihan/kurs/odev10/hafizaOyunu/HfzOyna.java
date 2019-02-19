@@ -53,9 +53,9 @@ public class HfzOyna extends JFrame {
 	
 	public void hfzInitialize() {
 		 cInitialize();
-		 buttonsInitialize();
 		 bPanelInitialize();
 		 uPanelInitialize() ;
+		 buttonsInitialize();
 				 
 		 
 	}
@@ -139,7 +139,7 @@ public class HfzOyna extends JFrame {
 		for (int i = 0; i < Runner.satirSayisi; i++) {
 			buttons[i] = new JButton("");
 			bPanel.add(buttons[i]);
-				
+			buttons[i].setVisible(true);	
 			if(i%(Runner.satirSayisi/2)==0 && i!=0) iii++;
 			if(i==(Runner.satirSayisi/2) ) 
 			{
@@ -148,7 +148,6 @@ public class HfzOyna extends JFrame {
 			ii++;
 								
 			buttons[i].setBounds((butonBasX+(70*ii)) , (200+(iii*70)) , butonBoyut, butonBoyut);
-			buttons[i].setVisible(true);
 			buttons[i].setActionCommand((""+i));
 			
 			buttons[i].addActionListener(new ActionListener() {
