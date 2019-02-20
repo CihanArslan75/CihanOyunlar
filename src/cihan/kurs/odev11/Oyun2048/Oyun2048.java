@@ -6,18 +6,19 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 
 public class Oyun2048 extends JFrame{
 	
 	private Container c= getContentPane();
 	
 	public Oyun2048() {
-		getContentPane().setBackground(Color.PINK);
+		c.setBackground(new Color(210, 180, 140));
 		Initialize();
 	}
 
 	private void Initialize() {
-		Oyun2048Button  b = new Oyun2048Button();
+		Oyun2048Logic  b = new Oyun2048Logic();
 		setTitle("2048");
 		setBounds(600, 200, 600, 600);
 		c.setLayout(null);

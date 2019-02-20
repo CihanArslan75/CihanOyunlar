@@ -33,7 +33,7 @@ public class Oyun2048Panel extends JPanel {
 	   bPanel.setLayout(null);
 	   bPanel.setVisible(true);   
 	   bPanel.setBounds(70, 50, panelBoyut, panelBoyut);
-	   bPanel.setBackground(new Color(255, 192, 203));
+	   bPanel.setBackground(new Color(255, 222, 173));
    }
 
 }

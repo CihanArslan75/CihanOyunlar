@@ -1,6 +1,7 @@
 package cihan.kurs.odev11.Oyun2048;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -8,17 +9,17 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-public class Oyun2048Button extends JButton implements KeyListener{
+public class Oyun2048Button extends JButton{
 	
-	private JButton[] buttons= new JButton[16];
+	protected JButton[][] buttons= new JButton[Runner.satirSayisi][Runner.satirSayisi];
 	private JPanel bbPanel;
 	
 	
-	public JButton[] getButtons() {
+	public JButton[][] getButtons() {
 		return buttons;
 	}
 
-	public void setButtons(JButton[] buttons) {
+	public void setButtons(JButton[][] buttons) {
 		this.buttons = buttons;
 	}
 
@@ -41,45 +42,31 @@ public class Oyun2048Button extends JButton implements KeyListener{
 		bbPanel=p.getbPanel();
 	
 		int butonBas=40;
-		int k=0;
-		int j=0;
-		for (int i = 0; i < buttons.length; i++) {
-			
-			if((i%Runner.satirSayisi)==0 && i!=0) {
-				k++;
-				j=0;
+		for (int i = 0; i <Runner.satirSayisi; i++) {
+			for (int j = 0; j < Runner.satirSayisi; j++) {	
+				
+				buttons[i][j]= new JButton("");
+				buttons[i][j].setBounds((butonBas+(j*90)),(butonBas+(i*90)),90,90);
+				buttons[i][j].setVisible(true);
+				bbPanel.add(buttons[i][j]);
+				buttons[i][j].setBackground(new Color(255, 228, 196));
+				buttons[i][j].setForeground(new Color(128, 0, 0));
+				buttons[i][j].addKeyListener( (KeyListener) this);
+				buttons[i][j].setFont(new Font("Arial", Font.BOLD, 30));
+
 			}
-			buttons[i]= new JButton("");
-			buttons[i].setBounds((butonBas+(j*90)),(butonBas+(k*90)),90,90);
-			buttons[i].setVisible(true);
-			bbPanel.add(buttons[i]);
-			buttons[i].setBackground(new Color(233, 150, 122));
-			buttons[i].setForeground(new Color(128, 0, 0));
-			j++;
-			//buttons[i].setActionCommand("bbbb");
-			buttons[i].addKeyListener( (KeyListener) this);
+		}
+		int a[]= Runner.getRandomNumber();
+		int a1[]= Runner.getRandomNumber();
+		
+		while(a[0]==a1[0] && a[1]==a1[1]) {
+			a1= Runner.getRandomNumber();
 		}
 		
-		
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+//		buttons[a[0]][a[1]].setText("2");
+//		buttons[a1[0]][a1[1]].setText("2");
+     buttons[0][2].setText("2");
+     buttons[2][2].setText("2");
 	}
 	
 
