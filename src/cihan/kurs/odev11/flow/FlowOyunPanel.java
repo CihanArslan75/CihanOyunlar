@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class FlowOyunPanel extends JPanel{
 	
 	private JPanel bPanel =new JPanel();
-	private int panelBoyut=700;
+	private int panelBoyut=800;
 
 	public FlowOyunPanel() {
 	}

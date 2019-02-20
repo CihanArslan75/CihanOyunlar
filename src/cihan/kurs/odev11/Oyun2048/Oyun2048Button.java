@@ -53,7 +53,7 @@ public class Oyun2048Button extends JButton{
 				buttons[i][j].setForeground(new Color(128, 0, 0));
 				buttons[i][j].addKeyListener( (KeyListener) this);
 				buttons[i][j].setFont(new Font("Arial", Font.BOLD, 30));
-
+               
 			}
 		}
 		int a[]= Runner.getRandomNumber();
@@ -65,9 +65,8 @@ public class Oyun2048Button extends JButton{
 		
 		buttons[a[0]][a[1]].setText("2");
 		buttons[a1[0]][a1[1]].setText("2");
-//     buttons[0][2].setText("2");
-//     buttons[2][2].setText("2");
+
 	}
-	
+
 
 }
