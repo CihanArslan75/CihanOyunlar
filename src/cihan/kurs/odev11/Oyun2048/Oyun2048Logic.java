@@ -118,7 +118,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	   		for (int j = buttons.length -2; j >=0 ; j--) {
 				if(!buttons[i][j].getText().equals("") ) {
 					if(buttons[i][j].getText().equals(buttons[(i)][j+1].getText()) && !buttons[i][j].getText().equals("") )
-					{ 	int sayi= Integer.parseInt(buttons[i+1][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+					{ 	int sayi= Integer.parseInt(buttons[i][j+1].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						buttons[i][j+1].setText(String.valueOf(sayi));
 						buttons[i][j].setText("");
 					}

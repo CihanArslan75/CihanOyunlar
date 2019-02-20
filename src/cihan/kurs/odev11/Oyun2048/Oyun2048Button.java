@@ -63,10 +63,10 @@ public class Oyun2048Button extends JButton{
 			a1= Runner.getRandomNumber();
 		}
 		
-//		buttons[a[0]][a[1]].setText("2");
-//		buttons[a1[0]][a1[1]].setText("2");
-     buttons[0][2].setText("2");
-     buttons[2][2].setText("2");
+		buttons[a[0]][a[1]].setText("2");
+		buttons[a1[0]][a1[1]].setText("2");
+//     buttons[0][2].setText("2");
+//     buttons[2][2].setText("2");
 	}
 	
 
