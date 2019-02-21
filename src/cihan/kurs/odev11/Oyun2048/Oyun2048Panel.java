@@ -13,9 +13,7 @@ public class Oyun2048Panel extends JPanel {
 	private int panelBoyut=450;
 	
 	public Oyun2048Panel() {
-		
 		panelInitialize();
-		
 	}
 
 	public JPanel getbPanel() {

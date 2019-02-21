@@ -69,7 +69,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	private void butonRenkVer(JButton button) {
 		if(button.getText().equals("2")) button.setBackground(Color.BLUE);
 		else if(button.getText().equals("4")) button.setBackground(Color.RED);
-		else if(button.getText().equals("8")) button.setBackground(Color.PINK);
+		else if(button.getText().equals("8")) button.setBackground(Color.ORANGE);
 		else if(button.getText().equals("16")) button.setBackground(Color.GREEN);
 		else if(button.getText().equals("32")) button.setBackground(Color.YELLOW);
 		else if(button.getText().equals("64")) button.setBackground(Color.MAGENTA);
