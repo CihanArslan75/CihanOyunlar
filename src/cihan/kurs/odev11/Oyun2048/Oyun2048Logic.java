@@ -47,8 +47,8 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 					
 			}
 		 }
-		 
-		 if(sayi==0 && sayiKontrol>0) {
+		//if(sayi==0  && sayiKontrol==0) {
+		if(sayi==0 ) {
 				oyunSonlandir();
 				JOptionPane.showMessageDialog(Oyun2048Logic.this,"Oyun Bitti");
 				
@@ -83,6 +83,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	}
 	
   public void yukariAl38() {
+	  
 	     for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
 			    int sayi=0;
@@ -158,7 +159,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						}	
 				  }		  
 			}	
-			if(sayi>0) sayiKontrol++;
+			
 		  }
 		
 		}
@@ -167,6 +168,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	}
   
   public void asagiAl40() {
+	
 	  for (int i = buttons.length-1; i >=0; i--) {
 			for (int j = 0; j < buttons.length; j++) {
 				int sayi=0;
@@ -243,7 +245,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 							
 					  }
 				}
-				if(sayi>0) sayiKontrol++;	
+				
 	       }
 	
 		}
@@ -252,6 +254,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	}
 
   public void sagaAl39() {
+	
 	  for (int i = 0; i < buttons.length; i++) {
 			for (int j = buttons.length-1; j >=0; j--) {
 				 int sayi=0;
@@ -328,7 +331,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 							
 					  }
 				}
-				if(sayi>0) sayiKontrol++;		
+				
 	       }
 	
 		}
@@ -337,6 +340,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	}
   
   public void solaAl37() {
+
 	  for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
 				int sayi=0;
@@ -413,7 +417,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						
 				  }
 			}
-				if(sayi>0) sayiKontrol++;			
+						
 	    }
 	}
 		
