@@ -17,8 +17,8 @@ public class FlowOyun extends JFrame{
 
 	private void Initialize() {
 		FlowOyunButon b=new FlowOyunButon();
-		
-		setBounds(500, 200, 800, 800);
+		setTitle("F L O W");
+		setBounds(500, 150, 800, 800);
 		getContentPane().setLayout(null);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

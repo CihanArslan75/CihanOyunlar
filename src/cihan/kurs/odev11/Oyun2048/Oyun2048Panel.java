@@ -1,7 +1,11 @@
 package cihan.kurs.odev11.Oyun2048;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Oyun2048Panel extends JPanel {
 	
@@ -11,6 +15,7 @@ public class Oyun2048Panel extends JPanel {
 	public Oyun2048Panel() {
 		
 		panelInitialize();
+		
 	}
 
 	public JPanel getbPanel() {
@@ -30,10 +35,14 @@ public class Oyun2048Panel extends JPanel {
 	}
 	
 	public void panelInitialize() {
+		
 	   bPanel.setLayout(null);
 	   bPanel.setVisible(true);   
 	   bPanel.setBounds(70, 50, panelBoyut, panelBoyut);
-	   bPanel.setBackground(new Color(255, 222, 173));
+	   bPanel.setBackground(Color.LIGHT_GRAY);
+	   bPanel.setBackground(new Color(192, 192, 192));
+	   
+	  
    }
 
 }

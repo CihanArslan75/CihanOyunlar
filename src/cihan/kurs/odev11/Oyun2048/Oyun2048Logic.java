@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
+	private int sayiKontrol=0;
 	
 	public Oyun2048Logic() {
 		
@@ -25,9 +27,8 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 		if(e.getKeyCode()==38) yukariAl38();
 		if(e.getKeyCode()==39) sagaAl39();
 		if(e.getKeyCode()==40) asagiAl40();
-		 //butonRenkVer(buttons[i][j]);
-		
-		
+		oyunSonKontrol();
+			
 	}
 
 	@Override
@@ -36,23 +37,59 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 		
 	}
 	
-	private void butonRenkVer(JButton a) {
-		if(a.getText().equals("2")) a.setBackground(Color.blue);
-		else if(a.getText().equals("4")) a.setBackground(Color.red);
-		else if(a.getText().equals("8")) a.setBackground(Color.pink);
-		else if(a.getText().equals("16")) a.setBackground(Color.green);
-		else if(a.getText().equals("32")) a.setBackground(Color.yellow);
-		else a.setBackground(Color.gray);
+	
+	private void oyunSonKontrol() {
+		int sayi=0;
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons.length; j++) {
+				butonRenkVer(buttons[i][j]);
+				if(buttons[i][j].getBackground().equals(new Color(211, 211, 211))) sayi++;	
+					
+			}
+		 }
+		 
+		 if(sayi==0 && sayiKontrol>0) {
+				oyunSonlandir();
+				JOptionPane.showMessageDialog(Oyun2048Logic.this,"Oyun Bitti");
+				
+			}
+		 
+		 
+	}
+	
+	private void oyunSonlandir()
+	{
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons.length; j++) {
+				buttons[i][j].setEnabled(false);			
+			}
+		}
+    }
+	
+	private void butonRenkVer(JButton button) {
+		if(button.getText().equals("2")) button.setBackground(Color.BLUE);
+		else if(button.getText().equals("4")) button.setBackground(Color.RED);
+		else if(button.getText().equals("8")) button.setBackground(Color.PINK);
+		else if(button.getText().equals("16")) button.setBackground(Color.GREEN);
+		else if(button.getText().equals("32")) button.setBackground(Color.YELLOW);
+		else if(button.getText().equals("64")) button.setBackground(Color.MAGENTA);
+		else if(button.getText().equals("128")) button.setBackground(Color.CYAN);
+		else if(button.getText().equals("256")) button.setBackground(Color.ORANGE);
+		else if(button.getText().equals("512")) button.setBackground(new Color(46, 139, 87));
+		else if(button.getText().equals("1024")) button.setBackground(new Color(128, 0, 128));
+		else if(button.getText().equals("2048")) button.setBackground(new Color(154, 205, 50));
+		else if(button.getText().equals("")) button.setBackground(new Color(211, 211, 211));
 		
 	}
 	
   public void yukariAl38() {
-		 for (int i = 0; i < buttons.length; i++) {
+	     for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
+			    int sayi=0;
 				if(!buttons[i][j].getText().equals("") ) {
 				  if((i<3) && buttons[i][j].getText().equals(buttons[(i+1)][j].getText()) && !buttons[i][j].getText().equals("") )
 					{ 	
-						int sayi= Integer.parseInt(buttons[i+1][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						sayi= Integer.parseInt(buttons[i+1][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i+1][j].setText("");
 					   
@@ -75,7 +112,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 					
 					}
 					else if((i<2)  && buttons[i][j].getText().equals(buttons[(i+2)][j].getText()) && !buttons[i][j].getText().equals("")  && buttons[(i+1)][j].getText().equals(""))
-					{ int sayi= Integer.parseInt(buttons[i+2][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+					{  sayi= Integer.parseInt(buttons[i+2][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i+2][j].setText("");
 						if(buttons[0][j].getText().equals(""))
@@ -91,7 +128,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 											
 					}
 					else if((i<1)  && buttons[i][j].getText().equals(buttons[(i+3)][j].getText()) && !buttons[i][j].getText().equals("") && buttons[(i+1)][j].getText().equals("")  && buttons[(i+2)][j].getText().equals(""))
-					{ int sayi= Integer.parseInt(buttons[i+3][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+					{  sayi= Integer.parseInt(buttons[i+3][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i+3][j].setText("");
 					    if(buttons[0][j].getText().equals(""))
@@ -118,13 +155,12 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						{
 							buttons[2][j].setText(buttons[i][j].getText());
 							buttons[i][j].setText("");
-						}
-						
-				  }
-			}
-					
-	}
-	
+						}	
+				  }		  
+			}	
+			if(sayi>0) sayiKontrol++;
+		  }
+		
 		}
 		
 	   yeniSayiGetir();
@@ -133,10 +169,11 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
   public void asagiAl40() {
 	  for (int i = buttons.length-1; i >=0; i--) {
 			for (int j = 0; j < buttons.length; j++) {
+				int sayi=0;
 				if(!buttons[i][j].getText().equals("") ) {
 					  if((i>0) && buttons[i][j].getText().equals(buttons[(i-1)][j].getText()) && !buttons[i][j].getText().equals("") )
 						{ 	
-							int sayi= Integer.parseInt(buttons[i-1][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+							 sayi= Integer.parseInt(buttons[i-1][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i-1][j].setText("");
 						   
@@ -159,7 +196,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						
 						}
 						else if((i>1)  && buttons[i][j].getText().equals(buttons[(i-2)][j].getText()) && !buttons[i][j].getText().equals("")  && buttons[(i-1)][j].getText().equals(""))
-						{ int sayi= Integer.parseInt(buttons[i-2][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						{  sayi= Integer.parseInt(buttons[i-2][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i-2][j].setText("");
 							if(buttons[3][j].getText().equals(""))
@@ -175,7 +212,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 												
 						}
 						else if((i>=3)  && buttons[i][j].getText().equals(buttons[(i-3)][j].getText()) && !buttons[i][j].getText().equals("") && buttons[(i-1)][j].getText().equals("")  && buttons[(i-2)][j].getText().equals(""))
-						{ int sayi= Integer.parseInt(buttons[i-3][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						{  sayi= Integer.parseInt(buttons[i-3][j].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i-3][j].setText("");
 						    if(buttons[3][j].getText().equals(""))
@@ -206,7 +243,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 							
 					  }
 				}
-					
+				if(sayi>0) sayiKontrol++;	
 	       }
 	
 		}
@@ -217,10 +254,11 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
   public void sagaAl39() {
 	  for (int i = 0; i < buttons.length; i++) {
 			for (int j = buttons.length-1; j >=0; j--) {
+				 int sayi=0;
 				if(!buttons[i][j].getText().equals("") ) {
 					  if((j>0) && buttons[i][j].getText().equals(buttons[(i)][j-1].getText()) && !buttons[i][j].getText().equals("") )
 						{ 	
-							int sayi= Integer.parseInt(buttons[i][j-1].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+							 sayi= Integer.parseInt(buttons[i][j-1].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i][j-1].setText("");
 						   
@@ -243,7 +281,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						
 						}
 						else if((j>1)  && buttons[i][j].getText().equals(buttons[(i)][j-2].getText()) && !buttons[i][j].getText().equals("")  && buttons[(i)][j-1].getText().equals(""))
-						{ int sayi= Integer.parseInt(buttons[i][j-2].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						{  sayi= Integer.parseInt(buttons[i][j-2].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i][j-2].setText("");
 							if(buttons[i][3].getText().equals(""))
@@ -259,7 +297,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 												
 						}
 						else if((j>=3)  && buttons[i][j].getText().equals(buttons[(i)][j-3].getText()) && !buttons[i][j].getText().equals("") && buttons[(i)][j-1].getText().equals("")  && buttons[(i)][j-2].getText().equals(""))
-						{ int sayi= Integer.parseInt(buttons[i][j-3].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						{  sayi= Integer.parseInt(buttons[i][j-3].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 						    buttons[i][j].setText(String.valueOf(sayi));	
 						    buttons[i][j-3].setText("");
 						    if(buttons[i][3].getText().equals(""))
@@ -290,7 +328,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 							
 					  }
 				}
-					
+				if(sayi>0) sayiKontrol++;		
 	       }
 	
 		}
@@ -301,10 +339,11 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
   public void solaAl37() {
 	  for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
+				int sayi=0;
 				if(!buttons[i][j].getText().equals("") ) {
 				  if((j<3) && buttons[i][j].getText().equals(buttons[(i)][j+1].getText()) && !buttons[i][j].getText().equals("") )
 					{ 	
-						int sayi= Integer.parseInt(buttons[i][j+1].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+						sayi= Integer.parseInt(buttons[i][j+1].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i][j+1].setText("");
 					   
@@ -327,7 +366,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 					
 					}
 					else if((j<2)  && buttons[i][j].getText().equals(buttons[(i)][j+2].getText()) && !buttons[i][j].getText().equals("")  && buttons[(i)][j+1].getText().equals(""))
-					{ int sayi= Integer.parseInt(buttons[i][j+2].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+					{  sayi= Integer.parseInt(buttons[i][j+2].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i][j+2].setText("");
 						if(buttons[i][0].getText().equals(""))
@@ -343,7 +382,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 											
 					}
 					else if((j<1)  && buttons[i][j].getText().equals(buttons[(i)][j+3].getText()) && !buttons[i][j].getText().equals("") && buttons[(i)][j+1].getText().equals("")  && buttons[(i)][j+2].getText().equals(""))
-					{ int sayi= Integer.parseInt(buttons[i][j+3].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
+					{   sayi= Integer.parseInt(buttons[i][j+3].getText()) + Integer.parseInt(buttons[i][j].getText()) ;
 					    buttons[i][j].setText(String.valueOf(sayi));	
 					    buttons[i][j+3].setText("");
 					    if(buttons[i][0].getText().equals(""))
@@ -374,10 +413,9 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 						
 				  }
 			}
-					
+				if(sayi>0) sayiKontrol++;			
+	    }
 	}
-	
-		}
 		
 	   yeniSayiGetir();
 	}

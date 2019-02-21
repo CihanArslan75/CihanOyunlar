@@ -9,7 +9,6 @@ public class Runner {
 	public static void main(String[] args) {
 		Oyun2048 o = new Oyun2048();
 		o.setVisible(true);
-	
 	}
 	
 	public static int[] getRandomNumber(){
@@ -40,11 +39,17 @@ public class Runner {
 		
 		int x= (rand.nextInt((max - min) ) +min);
 		
+		if(x==4)  x =(rand.nextInt((max - min) +1)+min);  // 2 daha çok gelsin. 4 'ün gelme olasılığını düşür
+		if(x==4)  x =(rand.nextInt((max - min) +1)+min);  // 2 daha çok gelsin. 4 'ün gelme olasılığını düşür
+		
 		while(x<min || x>max || x==3)  {
 			x =(rand.nextInt((max - min) +1)+min);
 		}
 		
+		
+		
 		return x;
 	}
-
+	
+	
 }
