@@ -20,7 +20,7 @@ public class FlowOyun extends JFrame{
 		FlowOyunButon b=new FlowOyunButon();
 		
         c.add(p.getbPanel());
-		for (int i = 0; i <Runner.satirSayisi; i++) {
+		for (int i = 0; i <Runner.oyunSeviye; i++) {
 			p.getbPanel().add(b.buttons[i]);
 		}
 		

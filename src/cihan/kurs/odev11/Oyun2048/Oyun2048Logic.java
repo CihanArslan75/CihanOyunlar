@@ -43,14 +43,19 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons.length; j++) {
 				butonRenkVer(buttons[i][j]);
-				if(buttons[i][j].getBackground().equals(new Color(211, 211, 211))) sayiBosYer++;	
+				if(buttons[i][j].getBackground().equals(new Color(173, 216, 230))) sayiBosYer++;
+				if(buttons[i][j].getText().equals("2048")) 
+				{
+					oyunSonlandir();
+					JOptionPane.showMessageDialog(Oyun2048Logic.this, "OYUNU KAZANDINIZ  !!!!!");
+				}
 					
 			}
 		 }
 		hamleVarmiKontrol();
 		if(sayiBosYer==0  && sayiKontrol==0 ) {
 				oyunSonlandir();
-				JOptionPane.showMessageDialog(Oyun2048Logic.this,"Oyun Bitti");	
+				JOptionPane.showMessageDialog(Oyun2048Logic.this,"HAMLE BİTTİ. OYUN BİTTİ !");	
 			}
 		 
 		 
@@ -77,7 +82,7 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 		else if(button.getText().equals("512")) button.setBackground(new Color(46, 139, 87));
 		else if(button.getText().equals("1024")) button.setBackground(new Color(128, 0, 128));
 		else if(button.getText().equals("2048")) button.setBackground(new Color(154, 205, 50));
-		else if(button.getText().equals("")) button.setBackground(new Color(211, 211, 211));
+		else if(button.getText().equals("")) button.setBackground(new Color(173, 216, 230));
 		
 	}
 	

@@ -25,7 +25,7 @@ public class Oyun2048 extends JFrame{
 		Oyun2048Panel  p = new Oyun2048Panel();
 		Oyun2048Logic  b = new Oyun2048Logic();
 		
-		c.setBackground(Color.GRAY);
+		c.setBackground(new Color(135, 206, 235));
 		c.setLayout(null);
 		c.add(p.getbPanel());
 		
@@ -42,6 +42,8 @@ public class Oyun2048 extends JFrame{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 				
 		JButton btnYeniOyun = new JButton("YENİ OYUN");
+		btnYeniOyun.setBackground(new Color(0, 0, 139));
+		btnYeniOyun.setForeground(Color.WHITE);
 		btnYeniOyun.setBounds(378, 507, 192, 33);
 		getContentPane().add(btnYeniOyun);
 		btnYeniOyun.setFont(new Font("Arial", Font.BOLD, 20));

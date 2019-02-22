@@ -41,13 +41,9 @@ public class Runner {
 		
 		if(x==4)  x =(rand.nextInt((max - min) +1)+min);  // 2 daha çok gelsin. 4 'ün gelme olasılığını düşür
 		if(x==4)  x =(rand.nextInt((max - min) +1)+min);  // 2 daha çok gelsin. 4 'ün gelme olasılığını düşür
-		
 		while(x<min || x>max || x==3)  {
 			x =(rand.nextInt((max - min) +1)+min);
 		}
-		
-		
-		
 		return x;
 	}
 	

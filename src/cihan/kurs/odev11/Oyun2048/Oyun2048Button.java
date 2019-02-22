@@ -29,10 +29,10 @@ public class Oyun2048Button extends JButton{
 			for (int j = 0; j < Runner.satirSayisi; j++) {
 				buttons[i][j]= new JButton("");
 				buttons[i][j].setBounds((butonBas+(j*90)),(butonBas+(i*90)),90,90);
-				buttons[i][j].setBackground(new Color(211, 211, 211));
+				buttons[i][j].setBackground(new Color(173, 216, 230));
 				buttons[i][j].setForeground(Color.WHITE);
 				buttons[i][j].addKeyListener( (KeyListener) this);
-				buttons[i][j].setFont(new Font("Arial", Font.BOLD, 30));
+				buttons[i][j].setFont(new Font("Arial", Font.BOLD, 25));
 				buttons[i][j].setVisible(true);				
 			}
 		}
