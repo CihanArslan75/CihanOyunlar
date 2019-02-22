@@ -14,8 +14,7 @@ import javax.swing.JPanel;
 
 public class FlowOyunButon extends JButton implements ActionListener{
 	
-	private JButton[] buttons= new JButton[Runner.oyunSeviye*Runner.oyunSeviye];
-	private JPanel bbPanel;
+	public JButton[] buttons= new JButton[Runner.oyunSeviye*Runner.oyunSeviye];
 	private String renk;
 		
 	public FlowOyunButon() {
@@ -31,21 +30,9 @@ public class FlowOyunButon extends JButton implements ActionListener{
 		this.buttons = buttons;
 	}
 
-	public JPanel getbbPanel() {
-		return bbPanel;
-	}
-
-	public void setbbPanel(JPanel bbPanel) {
-		this.bbPanel = bbPanel;
-	}
-
+	
 	private void buttonInitialize() {
-		
-		FlowOyunPanel p = new FlowOyunPanel();
-		bbPanel = p.getbPanel() ;		
-		bbPanel.setVisible(true);
-		bbPanel.setBounds(0,0,p.getPanelBoyut(),p.getPanelBoyut());
-		int butonBas=butonBasHesapla(p.getPanelBoyut());
+		int butonBas=40;
 		int k=0;
 		int j=0;
 		for (int i = 0; i < buttons.length; i++) {
@@ -57,7 +44,6 @@ public class FlowOyunButon extends JButton implements ActionListener{
 			buttons[i]= new JButton("");
 			buttons[i].setBounds((butonBas+(j*70)),(butonBas+(k*70)),70,70);
 			buttons[i].setVisible(true);
-			bbPanel.add(buttons[i]);
 			j++;
 			buttons[i].addActionListener((ActionListener) this);
 			

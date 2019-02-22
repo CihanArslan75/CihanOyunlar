@@ -16,16 +16,18 @@ public class FlowOyun extends JFrame{
 	}
 
 	private void Initialize() {
+		FlowOyunPanel  p = new FlowOyunPanel();
 		FlowOyunButon b=new FlowOyunButon();
+		
+        c.add(p.getbPanel());
+		for (int i = 0; i <Runner.satirSayisi; i++) {
+			p.getbPanel().add(b.buttons[i]);
+		}
+		
 		setTitle("F L O W");
 		setBounds(500, 150, 800, 800);
 		getContentPane().setLayout(null);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-		c.add(b.getbbPanel());
-		b.getbbPanel().setLayout(null);
-		b.getbbPanel().setVisible(true);
-		c.add(b.getbbPanel());
-	}
+		}
 }
