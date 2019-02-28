@@ -29,8 +29,8 @@ public class Oyun2048 extends JFrame{
 		c.setLayout(null);
 		c.add(p.getbPanel());
 		
-		for (int i = 0; i <Runner.satirSayisi; i++) {
-			for (int j = 0; j < Runner.satirSayisi; j++) {	
+		for (int i = 0; i <Runner2048.satirSayisi; i++) {
+			for (int j = 0; j < Runner2048.satirSayisi; j++) {	
 				p.getbPanel().add(b.buttons[i][j]);
 			}
 		}

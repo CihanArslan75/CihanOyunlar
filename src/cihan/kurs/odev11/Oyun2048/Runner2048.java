@@ -2,7 +2,7 @@ package cihan.kurs.odev11.Oyun2048;
 
 import java.util.Random;
 
-public class Runner {
+public class Runner2048 {
 	
 	public static int satirSayisi=4;
 
@@ -14,7 +14,7 @@ public class Runner {
 	public static int[] getRandomNumber(){
 		Random rand = new Random(); 
 		int min=0;
-		int max=(Runner.satirSayisi)-1;
+		int max=(Runner2048.satirSayisi)-1;
 		int x[] = new int[2];
 		
 		x[0]= (rand.nextInt((max - min) + 1) +min);

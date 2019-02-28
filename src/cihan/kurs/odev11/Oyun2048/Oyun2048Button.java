@@ -24,9 +24,9 @@ public class Oyun2048Button extends JButton{
 
 	public void buttonInitialize() {
 		int butonBas=40;
-		buttons= new JButton[Runner.satirSayisi][Runner.satirSayisi];
-		for (int i = 0; i <Runner.satirSayisi; i++) {
-			for (int j = 0; j < Runner.satirSayisi; j++) {
+		buttons= new JButton[Runner2048.satirSayisi][Runner2048.satirSayisi];
+		for (int i = 0; i <Runner2048.satirSayisi; i++) {
+			for (int j = 0; j < Runner2048.satirSayisi; j++) {
 				buttons[i][j]= new JButton("");
 				buttons[i][j].setBounds((butonBas+(j*90)),(butonBas+(i*90)),90,90);
 				buttons[i][j].setBackground(new Color(173, 216, 230));
@@ -36,11 +36,11 @@ public class Oyun2048Button extends JButton{
 				buttons[i][j].setVisible(true);				
 			}
 		}
-		int a[]= Runner.getRandomNumber();
-		int a1[]= Runner.getRandomNumber();
+		int a[]= Runner2048.getRandomNumber();
+		int a1[]= Runner2048.getRandomNumber();
 		
 		while(a[0]==a1[0] && a[1]==a1[1]) {
-			a1= Runner.getRandomNumber();
+			a1= Runner2048.getRandomNumber();
 		}
 		
 		buttons[a[0]][a[1]].setText("2");

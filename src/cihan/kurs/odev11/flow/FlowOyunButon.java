@@ -19,7 +19,6 @@ public class FlowOyunButon extends JButton implements ActionListener{
 		
 	public FlowOyunButon() {
 		buttonInitialize();
-		
 	}
 
 	public JButton[] getButtons() {
@@ -72,9 +71,7 @@ public class FlowOyunButon extends JButton implements ActionListener{
 			e.printStackTrace();
 		}
 		
-		//5;1;r0;r6;b1;b16;g4;g13;p9;p18;y11;y24
-		
-		for (int i = 2; i < bilgi1.length; i++) {
+			for (int i = 2; i < bilgi1.length; i++) {
 		
 			if(bilgi1[i].substring(0,1).equals("r")) 
 			{
@@ -105,8 +102,7 @@ public class FlowOyunButon extends JButton implements ActionListener{
 		
 		
 	}
-	
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());

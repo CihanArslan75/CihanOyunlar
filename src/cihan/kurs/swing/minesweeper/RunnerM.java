@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-public class Runner  {
+public class RunnerM  {
  
 	public static int SIZE=10;
 	public static  int BSIZE=SIZE*SIZE;
@@ -38,8 +38,8 @@ public class Runner  {
 		int temp;
 		int bombArrayNumber=bomb[0];
 		
-		for(int i=0 ; i<Runner.BOMBCOUNT;i++) {
-			for(int j=i;j<Runner.BOMBCOUNT;j++) {
+		for(int i=0 ; i<RunnerM.BOMBCOUNT;i++) {
+			for(int j=i;j<RunnerM.BOMBCOUNT;j++) {
 				if(bomb[j]<bombArrayNumber) 
 				{
 					temp=bombArrayNumber;
@@ -55,7 +55,7 @@ public class Runner  {
 	
 	
 	public static int getRandomNumber(){
-	    int x =(int)(Math.random() *((Runner.SIZE*Runner.SIZE)-1)+1);
+	    int x =(int)(Math.random() *((RunnerM.SIZE*RunnerM.SIZE)-1)+1);
 	    return x;
 	}
 	

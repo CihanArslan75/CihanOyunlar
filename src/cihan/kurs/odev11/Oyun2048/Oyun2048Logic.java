@@ -426,14 +426,14 @@ public class Oyun2048Logic extends Oyun2048Button implements KeyListener{
 	}
   
   public void yeniSayiGetir() {
-	  int a[]= Runner.getRandomNumber();
+	  int a[]= Runner2048.getRandomNumber();
 	  int yeniSayi = 0;
 	  
 	   while(!buttons[a[0]][a[1]].getText().equals("") && sayiBosYer>0) {
-			a= Runner.getRandomNumber();
+			a= Runner2048.getRandomNumber();
 	   }
 	   if(sayiBosYer>0) {
-		   yeniSayi=Runner.getRandom_2_4();
+		   yeniSayi=Runner2048.getRandom_2_4();
 		   buttons[a[0]][a[1]].setText(String.valueOf(yeniSayi));
 	   }
 	   

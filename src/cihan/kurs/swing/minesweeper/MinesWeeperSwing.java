@@ -12,7 +12,7 @@ import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
 
 public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionListener {
 	
-	public JButton[][] buttons=new JButton[Runner.SIZE][Runner.SIZE];
+	public JButton[][] buttons=new JButton[RunnerM.SIZE][RunnerM.SIZE];
 	public JButton btnStart = new JButton("");
 	private String btnNumber;
 	private int summ;
@@ -48,7 +48,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		txt1.setForeground(Color.RED);
 	    txt1.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txt1.setSize(new Dimension(10, 10));
-		txt1.setText(String.valueOf(Runner.BOMBCOUNT));
+		txt1.setText(String.valueOf(RunnerM.BOMBCOUNT));
 		txt1.setEditable(false);
 		txt1.setColumns(5);
 		txt1.setHorizontalAlignment(JTextField.CENTER);
@@ -58,7 +58,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		anaPanel.setLayout(new BorderLayout());
 	    c.add(anaPanel);
 	 
-		mPanel.setLayout(new GridLayout(Runner.SIZE,Runner.SIZE));
+		mPanel.setLayout(new GridLayout(RunnerM.SIZE,RunnerM.SIZE));
     	mPanel.setSize(500,500);
 		anaPanel.add(mPanel,BorderLayout.CENTER);
         sPanel.setForeground(Color.LIGHT_GRAY);
@@ -67,8 +67,8 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
         btnStart.setForeground(Color.LIGHT_GRAY);
         btnStart.setBackground(Color.LIGHT_GRAY);
         btnStart.setBounds(0, 0, 10, 10);
-      //  btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("resources/emoji.jpg")));
-        btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("/emoji.jpg")));
+       // btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("resources/emoji.jpg")));
+       btnStart.setIcon((Icon) new ImageIcon(MinesWeeperSwing.class.getResource("/emoji.jpg")));
 	                                                                 
 	    sPanel.setSize(100,100);
         
@@ -93,7 +93,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
      	
      	 btnStart.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent e) {
-            	txt1.setText(String.valueOf(Runner.BOMBCOUNT));
+            	txt1.setText(String.valueOf(RunnerM.BOMBCOUNT));
             	txt2.setText("");
             	mPanel.removeAll();
             	MinesWeeperSwingStart();	
@@ -104,9 +104,9 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	}
 	
 	public void JButtonInitialize(){
-		for(int i=0;i<Runner.SIZE;i++)
+		for(int i=0;i<RunnerM.SIZE;i++)
 		{
-			for(int j=0;j<Runner.SIZE;j++)
+			for(int j=0;j<RunnerM.SIZE;j++)
 			{
 			    buttons[i][j] = new JButton("");
 			    buttons[i][j].setActionCommand("S0" +i +j);
@@ -122,7 +122,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	public void actionPerformed(ActionEvent e) {
 		btnNumber=e.getActionCommand();
 		int selectInt=Integer.parseInt((btnNumber.substring(1,4)));
-		int[] ijBomb=Runner.findNumberfromIJ(selectInt);
+		int[] ijBomb=RunnerM.findNumberfromIJ(selectInt);
 		int i=ijBomb[0];
 		int j=ijBomb[1];
 		
@@ -141,27 +141,27 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		
 		setSightBombsArray(btnNumber,i,j);	
 						
-		 txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount()));   
-		 if(b.bombsArray[i][j]==Runner.BSIZE  &&  btnNumber.substring(0,1).equals("S") ) 
+		 txt1.setText(String.valueOf(RunnerM.BOMBCOUNT-bombCount()));   
+		 if(b.bombsArray[i][j]==RunnerM.BSIZE  &&  btnNumber.substring(0,1).equals("S") ) 
 	  	 {   
 			 
-			 for (int k = 0; k < Runner.SIZE; k++) {
-			    for (int l = 0; l < Runner.SIZE; l++) {
-					if(b.bombsArray[k][l]==Runner.SIZE*Runner.SIZE) {
+			 for (int k = 0; k < RunnerM.SIZE; k++) {
+			    for (int l = 0; l < RunnerM.SIZE; l++) {
+					if(b.bombsArray[k][l]==RunnerM.SIZE*RunnerM.SIZE) {
 						//buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_w.png")));
-						buttons[k][l].setIcon(new ImageIcon(Runner.class.getResource("/bomb_w.png")));
+						buttons[k][l].setIcon(new ImageIcon(RunnerM.class.getResource("/bomb_w.png")));
 					}
 				}
 			}
 			 //buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/bomb_r.png")));
-			 buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/bomb_r.png")));
+			 buttons[i][j].setIcon(new ImageIcon(RunnerM.class.getResource("/bomb_r.png")));
 			 
 			 timer.stop();	
 		     JOptionPane.showMessageDialog(new JFrame(), "YANDINIZ", "Dialog",JOptionPane.ERROR_MESSAGE);
 		     timer=null;
 		      
-		     for (int j2 = 0; j2 < Runner.SIZE ; j2++) {
-		    	 for (int k2 = 0; k2 < Runner.SIZE; k2++) {
+		     for (int j2 = 0; j2 < RunnerM.SIZE ; j2++) {
+		    	 for (int k2 = 0; k2 < RunnerM.SIZE; k2++) {
 					buttons[j2][k2].setEnabled(false); 
 			}
 				
@@ -173,7 +173,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	    {
 	    	buttons[i][j].setText(" ");
 	    }
-	    else if(b.bombsArray[i][j]!=Runner.BSIZE)
+	    else if(b.bombsArray[i][j]!=RunnerM.BSIZE)
 	    {   buttons[i][j].setIcon(null);
 	    	buttons[i][j].setText(String.valueOf(b.bombsArray[i][j]));
 	    	buttons[i][j].getText();
@@ -183,7 +183,7 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	   
 	    summ=b.getBombsControlArraySum();
 	    int bs= bombCount();
-	    if(summ == Runner.BSIZE && bs==Runner.BOMBCOUNT )  {
+	    if(summ == RunnerM.BSIZE && bs==RunnerM.BOMBCOUNT )  {
 	    	timer.stop();
 			JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
 			timer=null;	
@@ -220,17 +220,17 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
             if (SwingUtilities.isRightMouseButton(e)) {
             
               	int selectInt=Integer.parseInt((btnNumber.substring(1,4)));
-        		int[] ijBomb=Runner.findNumberfromIJ(selectInt);
+        		int[] ijBomb=RunnerM.findNumberfromIJ(selectInt);
         		int i=ijBomb[0];
         		int j=ijBomb[1];
         		
         		setSightBombsArray(btnNumber,i,j);
         		//buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/resources/flag.png")));
-        		buttons[i][j].setIcon(new ImageIcon(Runner.class.getResource("/flag.png")));
+        		buttons[i][j].setIcon(new ImageIcon(RunnerM.class.getResource("/flag.png")));
         		buttons[i][j].setActionCommand("S0" +i +j);
-        	    txt1.setText(String.valueOf(Runner.BOMBCOUNT-bombCount())); 
+        	    txt1.setText(String.valueOf(RunnerM.BOMBCOUNT-bombCount())); 
         		int bs=bombCount();
-    		    if(summ== (Runner.BSIZE-1) && bs==Runner.BOMBCOUNT)  {
+    		    if(summ== (RunnerM.BSIZE-1) && bs==RunnerM.BOMBCOUNT)  {
     		    	timer.stop();	
     				JOptionPane.showMessageDialog(new JFrame(), "Tebrikler Kazandınız !!", "Dialog",JOptionPane.ERROR_MESSAGE);
     				timer=null;
@@ -263,8 +263,8 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 	
 	public int bombCount() {
 	int recor=0;	
-	  for (int k = 0; k < Runner.SIZE; k++) {
-		for (int l = 0; l < Runner.SIZE; l++) {
+	  for (int k = 0; k < RunnerM.SIZE; k++) {
+		for (int l = 0; l < RunnerM.SIZE; l++) {
 			if(buttons[k][l].getIcon()!=null && buttons[k][l].getActionCommand().equals("S0"+k+l)) {
 				recor++;
 		    }
@@ -278,12 +278,12 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		boolean exit=true;
         String selectFirst=select.substring(0,1).toUpperCase( );
 /***************************************************************************************/
-        if(b.bombsArray[row][column]!=Runner.BSIZE ) {//bomba olmayan kutular için set
+        if(b.bombsArray[row][column]!=RunnerM.BSIZE ) {//bomba olmayan kutular için set
     	  if(b.bombsArray[row][column]==0 )  
 	      {   
     		  nearBoxOpen(row,column);
 	      }
-    	  else if(b.bombsArray[row][column]!=Runner.SIZE*Runner.SIZE ) 
+    	  else if(b.bombsArray[row][column]!=RunnerM.SIZE*RunnerM.SIZE ) 
     	  {
     		  buttons[row][column].setActionCommand(String.valueOf(b.bombsArray[row][column]));
     		  b.BombsControl[row][column]=1;
@@ -315,12 +315,12 @@ public class MinesWeeperSwing  extends JFrame implements MouseListener,ActionLis
 		   int nearBSum=Integer.parseInt(nearB[9]);
 		   for(int ii=0;ii<nearBSum;ii++)
 		   { 
-			  int[] injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+			  int[] injn=RunnerM.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
 			  int in=injn[0];
 			  int jn=injn[1];
 			  if(b.BombsControl[in][jn]==1) {continue;}
 			  b.BombsControl[in][jn]=1;
-			  if(b.bombsArray[in][jn]==Runner.SIZE*Runner.SIZE) {}
+			  if(b.bombsArray[in][jn]==RunnerM.SIZE*RunnerM.SIZE) {}
 			  else if(b.bombsArray[in][jn]!=0) 
 			  {
 				  buttons[in][jn].setText(String.valueOf(b.bombsArray[in][jn]));

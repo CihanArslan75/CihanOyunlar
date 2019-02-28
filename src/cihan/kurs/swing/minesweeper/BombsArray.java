@@ -12,8 +12,8 @@ import javax.swing.*;
 
 public class BombsArray { 
 	
-	public int[][] bombsArray = new int[Runner.SIZE][Runner.SIZE];
-	public int[][] BombsControl= new int[Runner.SIZE][Runner.SIZE];
+	public int[][] bombsArray = new int[RunnerM.SIZE][RunnerM.SIZE];
+	public int[][] BombsControl= new int[RunnerM.SIZE][RunnerM.SIZE];
 	
 	public int[][] getBombsArray() {
 		return bombsArray;
@@ -29,8 +29,8 @@ public class BombsArray {
 	
 	public int getBombsControlArraySum() {
 		 int sum=0;	 
-		 for(int i=0; i<Runner.SIZE;i++) {
-			 for(int j=0; j<Runner.SIZE;j++) {
+		 for(int i=0; i<RunnerM.SIZE;i++) {
+			 for(int j=0; j<RunnerM.SIZE;j++) {
 				 if(BombsControl[i][j]==1) sum++;
 			 }
 		 }
@@ -40,14 +40,14 @@ public class BombsArray {
 	
 	
 	public void setBombsArray() {
-		 int[]   bombs =  new int[Runner.BOMBCOUNT];
+		 int[]   bombs =  new int[RunnerM.BOMBCOUNT];
 		 int[]   ijBomb = new int[2];  
 		 bombs = getMwBomb();
 		
  /************ bombaları yerleştir **********************/
-         for(int i=0;i<Runner.BOMBCOUNT;i++) {
-		  	 ijBomb=Runner.findNumberfromIJ(bombs[i]);
-		  	 bombsArray[ijBomb[0]][ijBomb[1]]=Runner.BSIZE;
+         for(int i=0;i<RunnerM.BOMBCOUNT;i++) {
+		  	 ijBomb=RunnerM.findNumberfromIJ(bombs[i]);
+		  	 bombsArray[ijBomb[0]][ijBomb[1]]=RunnerM.BSIZE;
 		}
          
 	 
@@ -57,11 +57,11 @@ public class BombsArray {
          int[] injn;
      	 int in;
 		 int jn;
-		 for(int i=0;i<Runner.SIZE;i++) {
-			 for(int j=0;j<Runner.SIZE;j++) {
+		 for(int i=0;i<RunnerM.SIZE;i++) {
+			 for(int j=0;j<RunnerM.SIZE;j++) {
 					
 				
-				 if(bombsArray[i][j]==Runner.SIZE*Runner.SIZE)
+				 if(bombsArray[i][j]==RunnerM.SIZE*RunnerM.SIZE)
 				 {
 					continue;
 				 }
@@ -71,11 +71,11 @@ public class BombsArray {
 				   int nearBSum=Integer.parseInt(nearB[9]);
 				   for(int ii=0;ii<nearBSum;ii++)
 				   {  	
-					     injn=Runner.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
+					     injn=RunnerM.findNumberfromIJ(Integer.parseInt(nearB[ii].substring(1,4)));
 					    
 					     in=injn[0];
 						 jn=injn[1];
-						 if(bombsArray[in][jn]==Runner.SIZE*Runner.SIZE ) 
+						 if(bombsArray[in][jn]==RunnerM.SIZE*RunnerM.SIZE ) 
 						 {
 							 bombSum++;
 						 }
@@ -91,22 +91,22 @@ public class BombsArray {
 	
 	public  int[] getMwBomb() {
 		int bomb;
-		int bombCount=Runner.BOMBCOUNT;
+		int bombCount=RunnerM.BOMBCOUNT;
 	
 		int[]  bombArray = new  int[bombCount];
 		for(int i =0 ;i<bombCount ;i++)
 		{   
-			bomb= Runner.getRandomNumber();
+			bomb= RunnerM.getRandomNumber();
 			for(int ii =0 ;ii<bombCount ;ii++)
 			{
 				while(bomb==bombArray[ii]) {
-				bomb= Runner.getRandomNumber();
+				bomb= RunnerM.getRandomNumber();
 			}	
 			}
 			bombArray[i]=bomb;
 		}
 		
-			return Runner.sort(bombArray);
+			return RunnerM.sort(bombArray);
 	}
 	
 public String[] nearBox(int i,int j){
@@ -118,15 +118,15 @@ public String[] nearBox(int i,int j){
 	    int jLast;
 	    int a=0;
 	    int summ=0;
-	    int s=Runner.SIZE/10;
+	    int s=RunnerM.SIZE/10;
 		if(i==0) iFirst=i; else iFirst=i-1;
 		if(j==0) jFirst=j; else jFirst=j-1;
 		 
-		if(i==Runner.SIZE-1) iLast=i; else iLast=i+1;
-		if(j==Runner.SIZE-1) jLast=j; else jLast=j+1;
+		if(i==RunnerM.SIZE-1) iLast=i; else iLast=i+1;
+		if(j==RunnerM.SIZE-1) jLast=j; else jLast=j+1;
 		for(int ii=iFirst;ii<=iLast;ii++) {
 			for(int jj=jFirst;jj<=jLast;jj++) {
-				n[a]=Runner.findIJfromNumber(ii,jj);
+				n[a]=RunnerM.findIJfromNumber(ii,jj);
 				if(!n[a].equals(null) )  summ++;
 				a++;
 								
